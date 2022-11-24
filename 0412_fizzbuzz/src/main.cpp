@@ -17,16 +17,16 @@ public:
         {
             const int number = i + 1;
             std::string out;
+
             const bool div3 = number % 3 == 0;
             const bool div5 = number % 5 == 0;
-            if (!div3 && !div5)
+
+            if (div3) out = "Fizz";
+            if (div5) out += "Buzz";
+
+            if (out.empty())
             {
                 out = std::to_string(number);
-            }
-            else
-            {
-                if (div3) out = "Fizz";
-                if (div5) out += "Buzz";
             }
 
             result[i] = out;

@@ -15,16 +15,18 @@ public:
         std::vector<std::string> result(n);
         for (int i = 0; i < n; ++i)
         {
-            int number = i + 1;
+            const int number = i + 1;
             std::string out;
-            if (number % 3 && number % 5)
+            const bool div3 = number % 3 == 0;
+            const bool div5 = number % 5 == 0;
+            if (!div3 && !div5)
             {
                 out = std::to_string(number);
             }
             else
             {
-                if (number % 3 == 0) out = "Fizz";
-                if (number % 5 == 0) out += "Buzz";
+                if (div3) out = "Fizz";
+                if (div5) out += "Buzz";
             }
 
             result[i] = out;

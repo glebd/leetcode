@@ -12,7 +12,24 @@ class Solution
 public:
     std::vector<std::string> fizzBuzz(int n)
     {
-        return {};
+        std::vector<std::string> result(n);
+        for (int i = 0; i < n; ++i)
+        {
+            int number = i + 1;
+            std::string out;
+            if (number % 3 && number % 5)
+            {
+                out = std::to_string(number);
+            }
+            else
+            {
+                if (number % 3 == 0) out = "Fizz";
+                if (number % 5 == 0) out += "Buzz";
+            }
+
+            result[i] = out;
+        }
+        return result;
     }
 };
 

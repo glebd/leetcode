@@ -36,6 +36,7 @@ TEST(FizzBuzz, Test15)
 {
     Solution solution;
     auto actual = solution.fizzBuzz(15);
-    std::vector expected{"1"s, "2"s, "Fizz"s, "4"s, "Buzz"s, "Fizz"s, "7"s, "8"s, "Fizz"s, "Buzz"s, "11"s, "Fizz"s, "13"s, "14"s, "FizzBuzz"s};
+    std::vector expected{"1"s,    "2"s,    "Fizz"s, "4"s,    "Buzz"s, "Fizz"s, "7"s,       "8"s,
+                         "Fizz"s, "Buzz"s, "11"s,   "Fizz"s, "13"s,   "14"s,   "FizzBuzz"s};
     ASSERT_THAT(actual, ContainerEq(expected));
 }

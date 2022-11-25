@@ -26,3 +26,9 @@ TEST(NumSteps, Test3)
     Solution solution;
     ASSERT_EQ(solution.numberOfSteps(123), 12);
 }
+
+TEST(NumSteps, TestZero)
+{
+    Solution solution;
+    ASSERT_EQ(solution.numberOfSteps(0), 0);
+}

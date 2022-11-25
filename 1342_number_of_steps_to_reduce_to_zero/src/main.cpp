@@ -5,7 +5,16 @@ class Solution
 public:
     int numberOfSteps(int num)
     {
-        return 0;
+        int num_steps = 0;
+        while (num > 0)
+        {
+            if (num % 2) // odd
+                --num;
+            else // even
+                num /= 2;
+            ++num_steps;
+        }
+        return num_steps;
     }
 };
 

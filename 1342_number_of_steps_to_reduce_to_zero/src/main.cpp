@@ -1,6 +1,28 @@
 #include <gtest/gtest.h>
 
+class Solution
+{
+public:
+    int numberOfSteps(int num)
+    {
+        return 0;
+    }
+};
+
 TEST(NumSteps, Test1)
 {
-    ASSERT_TRUE(true);
+    Solution solution;
+    ASSERT_EQ(solution.numberOfSteps(14), 6);
+}
+
+TEST(NumSteps, Test2)
+{
+    Solution solution;
+    ASSERT_EQ(solution.numberOfSteps(8), 4);
+}
+
+TEST(NumSteps, Test3)
+{
+    Solution solution;
+    ASSERT_EQ(solution.numberOfSteps(123), 12);
 }

@@ -5,13 +5,16 @@ class Solution
 public:
     int numberOfSteps(int num)
     {
+        if (num < 0)
+            return 0;
+        unsigned n = num;
         int num_steps = 0;
-        while (num > 0)
+        while (n > 0)
         {
-            if (num & 1) // odd
-                --num;
+            if (n & 1) // odd
+                --n;
             else // even
-                num /= 2;
+                n >>= 1;
             ++num_steps;
         }
         return num_steps;

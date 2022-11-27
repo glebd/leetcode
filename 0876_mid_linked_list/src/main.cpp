@@ -1,9 +1,6 @@
-#include <iostream>
+#include <gtest/gtest.h>
 
-using namespace std;
-
-int main(int argc, char** argv)
+TEST(MidLinkedList, Test1)
 {
-    cout << "hello world!" << endl;
-    return 0;
+    ASSERT_TRUE(true);
 }

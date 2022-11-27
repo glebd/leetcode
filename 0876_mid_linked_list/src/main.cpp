@@ -69,3 +69,11 @@ TEST(MidLinkedList, Test2)
     auto* actual = solution.middleNode(head);
     ASSERT_EQ(actual, elem4);
 }
+
+TEST(MidLinkedList, Test3)
+{
+    auto* head = new ListNode(1);
+    Solution solution;
+    auto* actual = solution.middleNode(head);
+    ASSERT_EQ(actual, head);
+}

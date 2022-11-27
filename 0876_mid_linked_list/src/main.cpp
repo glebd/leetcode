@@ -27,23 +27,17 @@ public:
             return nullptr;
 
         auto* cur = head;
-        int size = 1;
+        auto* half = head;
+        bool increment = true;
         while (cur->next)
         {
-            ++size;
             cur = cur->next;
+            if (increment)
+                half = half->next;
+            increment = !increment;
         }
 
-        int target_index = size / 2;
-        cur = head;
-        int index = 0;
-        while (cur->next && index < target_index)
-        {
-            ++index;
-            cur = cur->next;
-        }
-
-        return cur;
+        return half;
     }
 };
 

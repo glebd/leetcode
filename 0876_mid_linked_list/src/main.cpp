@@ -23,21 +23,19 @@ class Solution
 public:
     ListNode* middleNode(ListNode* head)
     {
-        if (head == nullptr)
-            return nullptr;
-
-        auto* cur = head;
-        auto* half = head;
-        bool increment = true;
-        while (cur->next)
+        auto* last = head;
+        auto* mid = head;
+        while (last)
         {
-            cur = cur->next;
-            if (increment)
-                half = half->next;
-            increment = !increment;
+            last = last->next;
+            if (last)
+            {
+                last = last->next;
+                mid = mid->next;
+            }
         }
 
-        return half;
+        return mid;
     }
 };
 

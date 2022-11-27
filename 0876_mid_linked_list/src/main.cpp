@@ -26,7 +26,24 @@ public:
         if (head == nullptr)
             return nullptr;
 
-        return nullptr;
+        auto* cur = head;
+        int size = 1;
+        while (cur->next)
+        {
+            ++size;
+            cur = cur->next;
+        }
+
+        int target_index = size / 2;
+        cur = head;
+        int index = 0;
+        while (cur->next && index < target_index)
+        {
+            ++index;
+            cur = cur->next;
+        }
+
+        return cur;
     }
 };
 

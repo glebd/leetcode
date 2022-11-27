@@ -25,14 +25,10 @@ public:
     {
         auto* last = head;
         auto* mid = head;
-        while (last)
+        while (last && last->next)
         {
-            last = last->next;
-            if (last)
-            {
-                last = last->next;
-                mid = mid->next;
-            }
+            last = last->next->next;
+            mid = mid->next;
         }
 
         return mid;

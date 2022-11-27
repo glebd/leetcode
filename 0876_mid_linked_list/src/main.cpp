@@ -35,13 +35,6 @@ public:
     }
 };
 
-/*
-std::vector<ListNode*> vector2list(const std::vector<int>& vec)
-{
-    return nullptr;
-}
- */
-
 TEST(MidLinkedList, TestNull)
 {
     Solution solution;
@@ -51,7 +44,6 @@ TEST(MidLinkedList, TestNull)
 
 TEST(MidLinkedList, Test1)
 {
-    //std::vector data = {1, 2, 3, 4, 5};
     auto elem5 = std::make_unique<ListNode>(5);
     auto elem4 = std::make_unique<ListNode>(4, elem5.get());
     auto elem3 = std::make_unique<ListNode>(3, elem4.get());

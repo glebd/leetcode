@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <vector>
+#include <memory>
 
 // PR: https://github.com/glebd/leetcode/pull/new/0876_mid_linked_list
 
@@ -52,33 +52,33 @@ TEST(MidLinkedList, TestNull)
 TEST(MidLinkedList, Test1)
 {
     //std::vector data = {1, 2, 3, 4, 5};
-    auto* elem5 = new ListNode(5);
-    auto* elem4 = new ListNode(4, elem5);
-    auto* elem3 = new ListNode(3, elem4);
-    auto* elem2 = new ListNode(2, elem3);
-    auto* head = new ListNode(1, elem2);
+    auto elem5 = std::make_unique<ListNode>(5);
+    auto elem4 = std::make_unique<ListNode>(4, elem5.get());
+    auto elem3 = std::make_unique<ListNode>(3, elem4.get());
+    auto elem2 = std::make_unique<ListNode>(2, elem3.get());
+    auto head = std::make_unique<ListNode>(1, elem2.get());
     Solution solution;
-    auto* actual = solution.middleNode(head);
-    ASSERT_EQ(actual, elem3);
+    auto* actual = solution.middleNode(head.get());
+    ASSERT_EQ(actual, elem3.get());
 }
 
 TEST(MidLinkedList, Test2)
 {
-    auto* elem6 = new ListNode(6);
-    auto* elem5 = new ListNode(5, elem6);
-    auto* elem4 = new ListNode(4, elem5);
-    auto* elem3 = new ListNode(3, elem4);
-    auto* elem2 = new ListNode(2, elem3);
-    auto* head = new ListNode(1, elem2);
+    auto elem6 = std::make_unique<ListNode>(6);
+    auto elem5 = std::make_unique<ListNode>(5, elem6.get());
+    auto elem4 = std::make_unique<ListNode>(4, elem5.get());
+    auto elem3 = std::make_unique<ListNode>(3, elem4.get());
+    auto elem2 = std::make_unique<ListNode>(2, elem3.get());
+    auto head = std::make_unique<ListNode>(1, elem2.get());
     Solution solution;
-    auto* actual = solution.middleNode(head);
-    ASSERT_EQ(actual, elem4);
+    auto* actual = solution.middleNode(head.get());
+    ASSERT_EQ(actual, elem4.get());
 }
 
 TEST(MidLinkedList, Test3)
 {
-    auto* head = new ListNode(1);
+    auto head = std::make_unique<ListNode>(1);
     Solution solution;
-    auto* actual = solution.middleNode(head);
-    ASSERT_EQ(actual, head);
+    auto* actual = solution.middleNode(head.get());
+    ASSERT_EQ(actual, head.get());
 }

@@ -21,7 +21,7 @@ struct ListNode
 class Solution
 {
 public:
-    ListNode* middleNode(ListNode* head)
+    static ListNode* middleNode(ListNode* head)
     {
         auto* last = head;
         auto* mid = head;
@@ -37,8 +37,7 @@ public:
 
 TEST(MidLinkedList, TestNull)
 {
-    Solution solution;
-    auto* actual = solution.middleNode(nullptr);
+    auto* actual = Solution::middleNode(nullptr);
     ASSERT_EQ(actual, nullptr);
 }
 
@@ -50,7 +49,7 @@ TEST(MidLinkedList, Test1)
     auto elem2 = std::make_unique<ListNode>(2, elem3.get());
     auto head = std::make_unique<ListNode>(1, elem2.get());
     Solution solution;
-    auto* actual = solution.middleNode(head.get());
+    auto* actual = Solution::middleNode(head.get());
     ASSERT_EQ(actual, elem3.get());
 }
 
@@ -62,15 +61,13 @@ TEST(MidLinkedList, Test2)
     auto elem3 = std::make_unique<ListNode>(3, elem4.get());
     auto elem2 = std::make_unique<ListNode>(2, elem3.get());
     auto head = std::make_unique<ListNode>(1, elem2.get());
-    Solution solution;
-    auto* actual = solution.middleNode(head.get());
+    auto* actual = Solution::middleNode(head.get());
     ASSERT_EQ(actual, elem4.get());
 }
 
 TEST(MidLinkedList, Test3)
 {
     auto head = std::make_unique<ListNode>(1);
-    Solution solution;
-    auto* actual = solution.middleNode(head.get());
+    auto* actual = Solution::middleNode(head.get());
     ASSERT_EQ(actual, head.get());
 }

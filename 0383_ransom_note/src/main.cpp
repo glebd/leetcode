@@ -6,7 +6,7 @@
 class Solution
 {
 public:
-    bool canConstruct(std::string ransomNote, std::string magazine)
+    bool canConstruct(const std::string& ransomNote, const std::string& magazine)
     {
         std::map<char, int> char_map;
         for (const char& ch : magazine)

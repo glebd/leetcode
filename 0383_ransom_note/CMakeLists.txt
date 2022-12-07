@@ -11,6 +11,9 @@ project(0383_ransom_note LANGUAGES CXX C)
 add_executable(0383_ransom_note "")
 set_target_properties(0383_ransom_note PROPERTIES OUTPUT_NAME "0383_ransom_note")
 set_target_properties(0383_ransom_note PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/macosx/x86_64/release")
+target_include_directories(0383_ransom_note PRIVATE
+    /Users/glebd/.xmake/packages/g/gtest/1.12.1/29c22d8bb07f415a8108eaa78056a17d/include
+)
 target_compile_options(0383_ransom_note PRIVATE
     $<$<COMPILE_LANGUAGE:C>:-target>
     $<$<COMPILE_LANGUAGE:CXX>:-target>
@@ -23,6 +26,10 @@ target_compile_options(0383_ransom_note PRIVATE
     $<$<COMPILE_LANGUAGE:C>:-DNDEBUG>
     $<$<COMPILE_LANGUAGE:CXX>:-DNDEBUG>
 )
+set_target_properties(0383_ransom_note PROPERTIES CXX_EXTENSIONS OFF)
+target_compile_features(0383_ransom_note PRIVATE c_std_11)
+set_target_properties(0383_ransom_note PROPERTIES CXX_EXTENSIONS OFF)
+target_compile_features(0383_ransom_note PRIVATE cxx_std_17)
 if(MSVC)
     target_compile_options(0383_ransom_note PRIVATE $<$<CONFIG:Release>:-Ox -fp:fast>)
 else()
@@ -37,7 +44,13 @@ if(MSVC)
         MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif()
 target_link_libraries(0383_ransom_note PRIVATE
+    gtest_main
+    gtest
+    gmock
     z
+)
+target_link_directories(0383_ransom_note PRIVATE
+    /Users/glebd/.xmake/packages/g/gtest/1.12.1/29c22d8bb07f415a8108eaa78056a17d/lib
 )
 target_link_options(0383_ransom_note PRIVATE
     -stdlib=libc++

@@ -9,7 +9,7 @@ public:
     bool canConstruct(std::string ransomNote, std::string magazine)
     {
         std::map<char, int> char_map;
-        for (char ch : magazine)
+        for (const char& ch : magazine)
         {
             auto found = char_map.find(ch);
             if (found != char_map.end())
@@ -25,7 +25,7 @@ public:
         }
 
         bool can_construct{true};
-        for (char ch : ransomNote)
+        for (const char& ch : ransomNote)
         {
             auto found = char_map.find(ch);
             if (found == char_map.end())

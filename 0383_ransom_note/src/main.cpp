@@ -34,14 +34,10 @@ public:
                 can_construct = false;
                 break;
             }
-            // char found, check if value is > 0
+            // char found
             auto& elem = *found;
-            if (elem.second == 0)
-            {
-                can_construct = false;
-                break;
-            }
-            --elem.second;
+            if (--elem.second == 0)
+                char_map.erase(found);
         }
 
         return can_construct;

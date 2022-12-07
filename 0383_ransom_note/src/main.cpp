@@ -1,13 +1,50 @@
 #include <gtest/gtest.h>
 
 #include <string>
+#include <map>
 
 class Solution
 {
 public:
     bool canConstruct(std::string ransomNote, std::string magazine)
     {
-        return false;
+        std::map<char, int> char_map;
+        for (char ch : magazine)
+        {
+            auto found = char_map.find(ch);
+            if (found != char_map.end())
+            {
+                // character exists, increment value by 1
+                auto& elem = *found;
+                ++elem.second;
+            }
+            else
+            {
+                char_map.insert({ch, 1});
+            }
+        }
+
+        bool can_construct{true};
+        for (char ch : ransomNote)
+        {
+            auto found = char_map.find(ch);
+            if (found == char_map.end())
+            {
+                // char not found, can't construct
+                can_construct = false;
+                break;
+            }
+            // char found, check if value is > 0
+            auto& elem = *found;
+            if (elem.second == 0)
+            {
+                can_construct = false;
+                break;
+            }
+            --elem.second;
+        }
+
+        return can_construct;
     }
 };
 
@@ -27,4 +64,16 @@ TEST(RansomNote, Test3)
 {
     Solution solution;
     ASSERT_TRUE(solution.canConstruct("aa", "aab"));
+}
+
+TEST(RansomNote, TestEmptyRansomNote)
+{
+    Solution solution;
+    ASSERT_TRUE(solution.canConstruct("", "aab"));
+}
+
+TEST(RansomNote, TestEmptyMagazine)
+{
+    Solution solution;
+    ASSERT_FALSE(solution.canConstruct("abc", ""));
 }

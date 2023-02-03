@@ -7,6 +7,19 @@ class Solution
 public:
     int pivotIndex(const std::vector<int>& nums)
     {
+        for (size_t pivot = 0; pivot < nums.size(); ++pivot)
+        {
+            int left_sum = 0;
+            int right_sum = 0;
+
+            for (size_t j = 0; j < pivot; ++j)
+                left_sum += nums[j];
+            for (size_t j = pivot + 1; j < nums.size(); ++j)
+                right_sum += nums[j];
+            if (left_sum == right_sum)
+                return static_cast<int>(pivot);
+        }
+
         return -1;
     }
 };

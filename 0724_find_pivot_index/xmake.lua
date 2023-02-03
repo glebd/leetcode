@@ -1,6 +1,7 @@
 add_rules("mode.debug", "mode.release")
 set_languages("c11", "c++17")
 add_requires("gtest")
+set_optimize("none")
 
 target("0724_find_pivot_index")
     set_kind("binary")

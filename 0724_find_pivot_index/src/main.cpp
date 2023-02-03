@@ -14,7 +14,7 @@ public:
         const size_t size = nums.size();
         int pivot_value = nums[0];
         int left_sum = 0;
-        int right_sum = std::accumulate(std::next(std::cbegin(nums)), std::cend(nums), 0);
+        int right_sum = std::accumulate(std::next(nums.cbegin()), nums.cend(), 0);
         for (size_t pivot = 0; pivot < size; ++pivot)
         {
             if (left_sum == right_sum)

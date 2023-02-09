@@ -14,5 +14,15 @@ public:
 
 TEST(IsSubsequence, Test1)
 {
-    ASSERT_TRUE(true);
+    ASSERT_TRUE(Solution::isSubsequence("abc","ahbgdc"));
+}
+
+TEST(IsSubsequence, Test2)
+{
+    ASSERT_FALSE(Solution::isSubsequence("axc","ahbgdc"));
+}
+
+TEST(IsSubsequence, TestEmptyS)
+{
+    ASSERT_TRUE(Solution::isSubsequence("","ahbgdc"));
 }

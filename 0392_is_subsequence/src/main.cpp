@@ -26,3 +26,13 @@ TEST(IsSubsequence, TestEmptyS)
 {
     ASSERT_TRUE(Solution::isSubsequence("","ahbgdc"));
 }
+
+TEST(IsSubsequence, TestEmptyT)
+{
+    ASSERT_FALSE(Solution::isSubsequence("abc",""));
+}
+
+TEST(IsSubsequence, TestEmptyBoth)
+{
+    ASSERT_TRUE(Solution::isSubsequence("",""));
+}

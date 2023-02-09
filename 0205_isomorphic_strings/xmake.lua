@@ -1,8 +1,12 @@
 add_rules("mode.debug", "mode.release")
+set_languages("c11", "c++17")
+add_requires("gtest")
+set_optimize("none")
 
 target("0205_isomorphic_strings")
     set_kind("binary")
     add_files("src/*.cpp")
+    add_packages("gtest")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

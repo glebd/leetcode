@@ -2,5 +2,5 @@
 
 TEST(IsomorphicStrings, Test1)
 {
-  ASSERT_TRUE(true);
+    ASSERT_TRUE(true);
 }

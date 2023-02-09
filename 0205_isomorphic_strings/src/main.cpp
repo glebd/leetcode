@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include <map>
+#include <set>
 #include <string>
 
 class Solution
@@ -11,7 +12,7 @@ public:
         if (s.length() != t.length())
             return false;
         std::map<char, char> dict;
-        std::map<char, char> dict_reverse;
+        std::set<char> values;
         for (size_t i = 0; i < s.length(); ++i)
         {
             char sc = s[i];
@@ -25,11 +26,11 @@ public:
             }
             else
             {
-                auto found_reverse = dict_reverse.find(tc);
-                if (found_reverse != dict_reverse.end())
+                auto found_reverse = values.find(tc);
+                if (found_reverse != values.end())
                     return false;
                 dict.insert({sc, tc});
-                dict_reverse.insert({tc, sc});
+                values.insert(tc);
             }
         }
 

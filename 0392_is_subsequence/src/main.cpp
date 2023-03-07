@@ -8,18 +8,22 @@ class Solution
 public:
     static bool isSubsequence(const std::string& s, const std::string& t)
     {
-        return isSubsequenceRec(s, 0, t, 0);
-    }
-
-    static bool isSubsequenceRec(const std::string& s, int index_s, const std::string& t, int index_t)
-    {
-        if (index_s > static_cast<int>(s.length()) - 1)
-            return true;
-        if (index_t > static_cast<int>(t.length()) - 1)
-            return false;
-        if (s[index_s] == t[index_t])
-            return isSubsequenceRec(s, index_s + 1, t, index_t + 1);
-        return isSubsequenceRec(s, index_s, t, index_t + 1);
+        auto leftBound = s.length();
+        auto rightBound = t.length();
+        size_t left = 0;
+        size_t right = 0;
+        while (left < leftBound && right < rightBound)
+        {
+            if (s[left] == t[right])
+            {
+                ++left, ++right;
+            }
+            else
+            {
+                ++right;
+            }
+        }
+        return left == leftBound;
     }
 };
 

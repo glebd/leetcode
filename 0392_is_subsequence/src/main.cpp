@@ -9,12 +9,12 @@ public:
     static bool isSubsequence(const std::string& s, const std::string& t)
     {
         int last_t_index = -1;
-        for (size_t i = 0; i < s.length(); ++i)
+        for (const char ch : s)
         {
             bool found = false;
             for (int j = last_t_index + 1; j < static_cast<int>(t.length()); ++j)
             {
-                if (t[j] == s[i])
+                if (t[j] == ch)
                 {
                     last_t_index = j;
                     found = true;

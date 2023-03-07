@@ -8,7 +8,23 @@ class Solution
 public:
     static bool isSubsequence(const std::string& s, const std::string& t)
     {
-        return false;
+        int last_t_index = -1;
+        for (size_t i = 0; i < s.length(); ++i)
+        {
+            bool found = false;
+            for (int j = last_t_index + 1; j < static_cast<int>(t.length()); ++j)
+            {
+                if (t[j] == s[i])
+                {
+                    last_t_index = j;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+                return false;
+        }
+        return true;
     }
 };
 

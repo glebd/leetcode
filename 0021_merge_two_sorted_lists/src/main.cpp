@@ -32,38 +32,35 @@ public:
             return list1;
         ListNode* merged = nullptr;
         ListNode* cur_merged = nullptr;
-        ListNode* cur_other = nullptr;
         ListNode* cur1 = list1;
         ListNode* cur2 = list2;
-        if (cur2->val >= cur1->val)
+        do
         {
-            cur_merged = cur1;
-            cur_other = cur2;
-        }
-        else
-        {
-            cur_merged = cur2;
-            cur_other = cur1;
-        }
-        merged = cur_merged;
-        while (cur_other != nullptr)
-        {
-            ListNode* old_cur_merged = cur_merged;
-            while (cur_merged->val <= cur_other->val)
+            if (cur2->val >= cur1->val)
             {
-                if (cur_merged->next == nullptr)
-                {
-                    cur_merged->next = cur_other;
-                    return merged;
-                }
-                old_cur_merged = cur_merged;
-                cur_merged = cur_merged->next;
+                if (merged == nullptr)
+                    merged = cur1;
+                if (cur_merged != nullptr)
+                    cur_merged->next = cur1;
+                cur_merged = cur1;
+                cur1 = cur1->next;
             }
-            old_cur_merged->next = cur_other;
-            ListNode* new_cur_other = cur_other->next;
-            cur_other->next = cur_merged;
-            cur_other = new_cur_other;
-        }
+            else
+            {
+                if (merged == nullptr)
+                    merged = cur2;
+                if (cur_merged != nullptr)
+                    cur_merged->next = cur2;
+                cur_merged = cur2;
+                cur2 = cur2->next;
+            }
+        } while (cur1 != nullptr && cur2 != nullptr);
+
+        if (cur1 == nullptr)
+            cur_merged->next = cur2;
+        else
+            cur_merged->next = cur1;
+
         return merged;
     }
 };

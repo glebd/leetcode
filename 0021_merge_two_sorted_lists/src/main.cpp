@@ -94,19 +94,6 @@ TEST(MergeSortedLists, Test1)
         merged = merged->next;
     }
     ASSERT_EQ(actual, expected);
-    /*
-    ASSERT_EQ(merged, list1node1.get());
-    ASSERT_TRUE(merged->next != nullptr);
-    ASSERT_EQ(merged->next, list2node1.get());
-    ASSERT_TRUE(merged->next->next != nullptr);
-    ASSERT_EQ(merged->next->next, list1node2.get());
-    ASSERT_TRUE(merged->next->next->next != nullptr);
-    ASSERT_EQ(merged->next->next->next, list2node2.get());
-    ASSERT_TRUE(merged->next->next->next->next != nullptr);
-    ASSERT_EQ(merged->next->next->next->next, list1node3.get());
-    ASSERT_TRUE(merged->next->next->next->next->next != nullptr);
-    ASSERT_EQ(merged->next->next->next->next->next, list2node3.get());
-     */
 }
 
 TEST(MergeSortedLists, TestEmpty)

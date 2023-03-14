@@ -102,12 +102,7 @@ TEST(MergeSortedLists, Test1)
     auto* merged = Solution::mergeTwoLists(list1_head, list2_head);
 
     ASSERT_TRUE(merged != nullptr);
-    std::vector<int> actual;
-    while (merged)
-    {
-        actual.push_back(merged->val);
-        merged = merged->next;
-    }
+    auto actual = list2values(merged);
     ASSERT_EQ(actual, expected);
 }
 
@@ -147,11 +142,6 @@ TEST(MergeSortedLists, Fail1)
     std::vector<int> expected = {-10, -9, -6, -5, -4, -3, 0, 1, 7, 8, 8, 9, 9};
     auto* merged = Solution::mergeTwoLists(list1_head, list2_head);
     ASSERT_NE(merged, nullptr);
-    std::vector<int> actual;
-    while (merged)
-    {
-        actual.push_back(merged->val);
-        merged = merged->next;
-    }
+    auto actual = list2values(merged);
     ASSERT_EQ(actual, expected);
 }

@@ -75,6 +75,17 @@ auto values2list(const std::vector<int>& values)
     return list1;
 }
 
+auto list2values(ListNode* head)
+{
+    std::vector<int> values;
+    while (head)
+    {
+        values.push_back(head->val);
+        head = head->next;
+    }
+    return values;
+}
+
 TEST(MergeSortedLists, Test1)
 {
     using namespace testing;

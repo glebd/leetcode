@@ -118,6 +118,16 @@ TEST(MergeSortedLists, TestSecondEmpty)
     ASSERT_EQ(merged, node.get());
 }
 
+auto values2list(const std::vector<int>& values)
+{
+    std::vector<std::unique_ptr<ListNode>> list1(values.size());
+    std::transform(values.begin(), values.end(), list1.begin(), [](const int value)
+                   { return std::make_unique<ListNode>(value); });
+    for (int i = 0; i < static_cast<int>(list1.size()) - 1; ++i)
+        list1[i]->next = list1[i + 1].get();
+    return list1;
+}
+
 TEST(MergeSortedLists, Fail1)
 {
     // ERROR: time limit exceeded

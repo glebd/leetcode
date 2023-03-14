@@ -132,23 +132,16 @@ TEST(MergeSortedLists, Fail1)
 {
     // ERROR: time limit exceeded
     //[-10,-9,-6,-4,1,9,9]
-    auto list1node7 = std::make_unique<ListNode>(-10);
-    auto list1node6 = std::make_unique<ListNode>(-9, list1node7.get());
-    auto list1node5 = std::make_unique<ListNode>(-6, list1node6.get());
-    auto list1node4 = std::make_unique<ListNode>(-4, list1node5.get());
-    auto list1node3 = std::make_unique<ListNode>(1, list1node4.get());
-    auto list1node2 = std::make_unique<ListNode>(9, list1node3.get());
-    auto list1node1 = std::make_unique<ListNode>(9, list1node2.get());
+    std::vector<int> list1_values{-10, -9, -6, -4, 1, 9, 9};
+    auto list1 = values2list(list1_values);
+    ListNode* list1_head = list1.front().get();
     //[-5,-3,0,7,8,8]
-    auto list2node6 = std::make_unique<ListNode>(-5);
-    auto list2node5 = std::make_unique<ListNode>(-3, list2node6.get());
-    auto list2node4 = std::make_unique<ListNode>(0, list2node5.get());
-    auto list2node3 = std::make_unique<ListNode>(7, list2node4.get());
-    auto list2node2 = std::make_unique<ListNode>(8, list2node3.get());
-    auto list2node1 = std::make_unique<ListNode>(8, list2node2.get());
+    std::vector<int> list2_values{-5, -3, 0, 7, 8, 8};
+    auto list2 = values2list(list2_values);
+    ListNode* list2_head = list2.front().get();
 
-    std::vector<int> expected = {-10,-9,-6,-5,-4,-3,0,1,7,8,8,9,9};
-    auto* merged = Solution::mergeTwoLists(list1node1.get(), list2node1.get());
+    std::vector<int> expected = {-10, -9, -6, -5, -4, -3, 0, 1, 7, 8, 8, 9, 9};
+    auto* merged = Solution::mergeTwoLists(list1_head, list2_head);
     ASSERT_NE(merged, nullptr);
     std::vector<int> actual;
     while (merged)

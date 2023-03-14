@@ -124,7 +124,6 @@ TEST(MergeSortedLists, TestSecondEmpty)
 
 TEST(MergeSortedLists, Fail1)
 {
-    // ERROR: time limit exceeded
     //[-10,-9,-6,-4,1,9,9]
     std::vector<int> list1_values{-10, -9, -6, -4, 1, 9, 9};
     auto list1 = values2list(list1_values);

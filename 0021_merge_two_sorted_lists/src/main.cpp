@@ -83,7 +83,7 @@ TEST(MergeSortedLists, Test1)
     list2node1->next = list2node2.get();
     list2node2->next = list2node3.get();
 
-    std::vector<int> expected = {1,1,2,3,4,4};
+    std::vector<int> expected = {1, 1, 2, 3, 4, 4};
     auto* merged = Solution::mergeTwoLists(list1, list2);
 
     ASSERT_TRUE(merged != nullptr);

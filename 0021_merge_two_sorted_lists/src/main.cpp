@@ -79,22 +79,16 @@ TEST(MergeSortedLists, Test1)
 {
     using namespace testing;
 
-    auto list1node1 = std::make_unique<ListNode>(1);
-    auto list1node2 = std::make_unique<ListNode>(2);
-    auto list1node3 = std::make_unique<ListNode>(4);
-    ListNode* list1 = list1node1.get();
-    list1node1->next = list1node2.get();
-    list1node2->next = list1node3.get();
+    std::vector<int> list1_values{1, 2, 4};
+    auto list1 = values2list(list1_values);
+    ListNode* list1_head = list1.front().get();
 
-    auto list2node1 = std::make_unique<ListNode>(1);
-    auto list2node2 = std::make_unique<ListNode>(3);
-    auto list2node3 = std::make_unique<ListNode>(4);
-    ListNode* list2 = list2node1.get();
-    list2node1->next = list2node2.get();
-    list2node2->next = list2node3.get();
+    std::vector<int> list2_values{1, 3, 4};
+    auto list2 = values2list(list2_values);
+    ListNode* list2_head = list2.front().get();
 
     std::vector<int> expected = {1, 1, 2, 3, 4, 4};
-    auto* merged = Solution::mergeTwoLists(list1, list2);
+    auto* merged = Solution::mergeTwoLists(list1_head, list2_head);
 
     ASSERT_TRUE(merged != nullptr);
     std::vector<int> actual;

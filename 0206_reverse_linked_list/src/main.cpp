@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 
+#include <algorithm>
 #include <memory>
 #include <vector>
-#include <algorithm>
 
 struct ListNode
 {
@@ -54,5 +54,30 @@ public:
 
 TEST(ReverseLinkedList, Test1)
 {
-    ASSERT_TRUE(true);
+    std::vector<int> src{1, 2, 3, 4, 5};
+    auto list = values2list(src);
+    ListNode* head = list.front().get();
+    ListNode* reversed = Solution::reverseList(head);
+    ASSERT_NE(head, nullptr);
+    auto actual = list2values(reversed);
+    std::vector<int> expected{5, 4, 3, 2, 1};
+    ASSERT_EQ(actual, expected);
+}
+
+TEST(ReverseLinkedList, Test2)
+{
+    std::vector<int> src{1, 2};
+    auto list = values2list(src);
+    ListNode* head = list.front().get();
+    ListNode* reversed = Solution::reverseList(head);
+    ASSERT_NE(head, nullptr);
+    auto actual = list2values(reversed);
+    std::vector<int> expected{2, 1};
+    ASSERT_EQ(actual, expected);
+}
+
+TEST(ReverseLinkedList, TestEmpty)
+{
+    ListNode* reversed = Solution::reverseList(nullptr);
+    ASSERT_EQ(reversed, nullptr);
 }

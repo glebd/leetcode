@@ -31,38 +31,13 @@ public:
             return list2;
         if (list2 == nullptr)
             return list1;
-        ListNode* merged = nullptr;
-        ListNode* cur_merged = nullptr;
-        ListNode* cur1 = list1;
-        ListNode* cur2 = list2;
-        do
+        if (list1->val < list2->val)
         {
-            if (cur2->val >= cur1->val)
-            {
-                if (merged == nullptr)
-                    merged = cur1;
-                if (cur_merged != nullptr)
-                    cur_merged->next = cur1;
-                cur_merged = cur1;
-                cur1 = cur1->next;
-            }
-            else
-            {
-                if (merged == nullptr)
-                    merged = cur2;
-                if (cur_merged != nullptr)
-                    cur_merged->next = cur2;
-                cur_merged = cur2;
-                cur2 = cur2->next;
-            }
-        } while (cur1 != nullptr && cur2 != nullptr);
-
-        if (cur1 == nullptr)
-            cur_merged->next = cur2;
-        else
-            cur_merged->next = cur1;
-
-        return merged;
+            list1->next = mergeTwoLists(list1->next, list2);
+            return list1;
+        }
+        list2->next = mergeTwoLists(list1, list2->next);
+        return list2;
     }
 };
 

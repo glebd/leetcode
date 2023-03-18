@@ -48,7 +48,16 @@ class Solution
 public:
     static ListNode* reverseList(ListNode* head)
     {
-        return nullptr;
+        ListNode* reversed = nullptr;
+        while (head != nullptr)
+        {
+            ListNode* next = head->next;
+            ListNode* reversed_next = reversed;
+            reversed = head;
+            reversed->next = reversed_next;
+            head = next;
+        }
+        return reversed;
     }
 };
 

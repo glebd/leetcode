@@ -59,6 +59,18 @@ public:
         }
         return reversed;
     }
+
+    static ListNode* reverseListRecursive(ListNode* head)
+    {
+        if (head == nullptr || head->next == nullptr)
+            return head;
+
+        ListNode* tail = head->next;
+        ListNode* rhead = reverseListRecursive(tail);
+        tail->next = head;
+        head->next = nullptr;
+        return rhead;
+    }
 };
 
 TEST(ReverseLinkedList, Test1)
@@ -88,5 +100,35 @@ TEST(ReverseLinkedList, Test2)
 TEST(ReverseLinkedList, TestEmpty)
 {
     ListNode* reversed = Solution::reverseList(nullptr);
+    ASSERT_EQ(reversed, nullptr);
+}
+
+TEST(ReverseLinkedListRecursive, Test1)
+{
+    std::vector<int> src{1, 2, 3, 4, 5};
+    auto list = values2list(src);
+    ListNode* head = list.front().get();
+    ListNode* reversed = Solution::reverseListRecursive(head);
+    ASSERT_NE(head, nullptr);
+    auto actual = list2values(reversed);
+    std::vector<int> expected{5, 4, 3, 2, 1};
+    ASSERT_EQ(actual, expected);
+}
+
+TEST(ReverseLinkedListRecursive, Test2)
+{
+    std::vector<int> src{1, 2};
+    auto list = values2list(src);
+    ListNode* head = list.front().get();
+    ListNode* reversed = Solution::reverseListRecursive(head);
+    ASSERT_NE(head, nullptr);
+    auto actual = list2values(reversed);
+    std::vector<int> expected{2, 1};
+    ASSERT_EQ(actual, expected);
+}
+
+TEST(ReverseLinkedListRecursive, TestEmpty)
+{
+    ListNode* reversed = Solution::reverseListRecursive(nullptr);
     ASSERT_EQ(reversed, nullptr);
 }

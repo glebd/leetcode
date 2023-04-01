@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 #include <memory>
 #include <vector>
+#include <set>
 
 struct ListNode
 {
@@ -47,7 +48,16 @@ class Solution
 public:
     static ListNode* detectCycle(ListNode* head)
     {
-        return head;
+        std::set<ListNode*> nodes;
+        ListNode* cur = head;
+        while (cur != nullptr && cur->next != nullptr)
+        {
+            if (nodes.find(cur->next) != nodes.end())
+                return cur->next;
+            nodes.insert(cur);
+            cur = cur->next;
+        }
+        return nullptr;
     }
 };
 

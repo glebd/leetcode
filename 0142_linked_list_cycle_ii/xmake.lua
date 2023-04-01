@@ -1,13 +1,17 @@
 add_rules("mode.debug", "mode.release")
 set_languages("c11", "c++17")
-add_requires("gtest")
+add_requires("gtest", {configs = {main = true, gmock = true}})
 set_optimize("none")
 
 target("0142_linked_list_cycle_ii")
     set_kind("binary")
     add_files("src/*.cpp")
 	add_packages("gtest")
-
+	if is_plat("windows") then
+        -- fixes "LINK : fatal error LNK1561: entry point must be defined"
+        add_ldflags("/subsystem:console")
+    end
+	
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
 --

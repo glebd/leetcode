@@ -75,3 +75,29 @@ TEST(LinkedListCycle2, Test1)
     int index = node2index(list, cycle);
     ASSERT_EQ(index, 1);
 }
+
+TEST(LinkedListCycle2, Test2)
+{
+    std::vector<int> src{1, 2};
+    auto list = values2list(src);
+    ListNode* head = list.front().get();
+    ListNode* cycle = Solution::detectCycle(head);
+    int index = node2index(list, cycle);
+    ASSERT_EQ(index, 0);
+}
+
+TEST(LinkedListCycle2, Test3)
+{
+    std::vector<int> src{1};
+    auto list = values2list(src);
+    ListNode* head = list.front().get();
+    ListNode* cycle = Solution::detectCycle(head);
+    int index = node2index(list, cycle);
+    ASSERT_EQ(index, -1);
+}
+
+TEST(LinkedListCycle2, TestEmpty)
+{
+    ListNode* cycle = Solution::detectCycle(nullptr);
+    ASSERT_EQ(cycle, nullptr);
+}

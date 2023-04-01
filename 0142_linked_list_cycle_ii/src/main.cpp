@@ -68,5 +68,10 @@ int node2index(const std::vector<std::unique_ptr<ListNode>>& list, const ListNod
 
 TEST(LinkedListCycle2, Test1)
 {
-    ASSERT_TRUE(true);
+    std::vector<int> src{3, 2, 0, -4};
+    auto list = values2list(src);
+    ListNode* head = list.front().get();
+    ListNode* cycle = Solution::detectCycle(head);
+    int index = node2index(list, cycle);
+    ASSERT_EQ(index, 1);
 }

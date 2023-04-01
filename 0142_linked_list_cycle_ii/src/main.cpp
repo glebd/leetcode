@@ -70,6 +70,7 @@ TEST(LinkedListCycle2, Test1)
 {
     std::vector<int> src{3, 2, 0, -4};
     auto list = values2list(src);
+    list[3]->next = list[1].get();
     ListNode* head = list.front().get();
     ListNode* cycle = Solution::detectCycle(head);
     int index = node2index(list, cycle);
@@ -80,6 +81,7 @@ TEST(LinkedListCycle2, Test2)
 {
     std::vector<int> src{1, 2};
     auto list = values2list(src);
+    list[1]->next = list[0].get();
     ListNode* head = list.front().get();
     ListNode* cycle = Solution::detectCycle(head);
     int index = node2index(list, cycle);

@@ -2,7 +2,6 @@
 #include <gtest/gtest.h>
 #include <memory>
 #include <vector>
-#include <set>
 
 struct ListNode
 {
@@ -45,19 +44,36 @@ auto list2values(ListNode* head)
 
 class Solution
 {
+    static ListNode* getIntersect(ListNode* head)
+    {
+        if (head == nullptr)
+            return nullptr;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while (fast != nullptr && fast->next != nullptr)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (slow == fast)
+                return slow;
+        }
+        return nullptr;
+    }
+
 public:
     static ListNode* detectCycle(ListNode* head)
     {
-        std::set<ListNode*> nodes;
-        ListNode* cur = head;
-        while (cur != nullptr && cur->next != nullptr)
+        ListNode* intersect = getIntersect(head);
+        if (intersect == nullptr)
+            return nullptr;
+        ListNode* ptr1 = head;
+        ListNode* ptr2 = intersect;
+        while (ptr1 != ptr2)
         {
-            if (nodes.find(cur->next) != nodes.end())
-                return cur->next;
-            nodes.insert(cur);
-            cur = cur->next;
+            ptr1 = ptr1->next;
+            ptr2 = ptr2->next;
         }
-        return nullptr;
+        return ptr1;
     }
 };
 

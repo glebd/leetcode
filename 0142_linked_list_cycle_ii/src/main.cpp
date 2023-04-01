@@ -42,6 +42,14 @@ auto list2values(ListNode* head)
     return values;
 }
 
+class Solution
+{
+public:
+    static ListNode* detectCycle(ListNode* head)
+    {
+        return head;
+    }
+};
 
 int node2index(const std::vector<std::unique_ptr<ListNode>>& list, const ListNode* node)
 {

@@ -43,6 +43,21 @@ auto list2values(ListNode* head)
 }
 
 
+int node2index(const std::vector<std::unique_ptr<ListNode>>& list, const ListNode* node)
+{
+    int index = -1;
+    for (int i = 0; i < static_cast<int>(list.size()); ++i)
+    {
+        const auto& elem = list[i];
+        if (node == elem.get())
+        {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
 TEST(LinkedListCycle2, Test1)
 {
     ASSERT_TRUE(true);

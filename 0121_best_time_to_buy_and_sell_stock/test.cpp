@@ -12,9 +12,7 @@ public:
             const int cur_price = prices[i];
             if (min_price == -1)
                 min_price = cur_price;
-            const int cur_diff = cur_price - min_price;
-            if (cur_diff > max_diff)
-                max_diff = cur_diff;
+            max_diff = std::max(max_diff, cur_price - min_price);
             min_price = std::min(min_price, cur_price);
         }
         return max_diff;

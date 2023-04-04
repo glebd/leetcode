@@ -5,14 +5,14 @@ class Solution
 public:
     static int maxProfit(std::vector<int>& prices)
     {
-        int min_price = -1;
+        int min_price = std::numeric_limits<int>::max();
         int max_diff = 0;
         for (const int cur_price : prices)
         {
-            if (min_price == -1)
+            if (cur_price < min_price)
                 min_price = cur_price;
-            max_diff = std::max(max_diff, cur_price - min_price);
-            min_price = std::min(min_price, cur_price);
+            else
+                max_diff = std::max(max_diff, cur_price - min_price);
         }
         return max_diff;
     }

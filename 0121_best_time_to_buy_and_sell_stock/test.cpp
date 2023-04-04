@@ -5,15 +5,17 @@ class Solution
 public:
     static int maxProfit(std::vector<int>& prices)
     {
+        int min_price = -1;
         int max_diff = 0;
-        for (size_t buy_index = 0; buy_index < prices.size(); ++buy_index)
+        for (size_t i = 0; i < prices.size(); ++i)
         {
-            const int buy_price = prices[buy_index];
-            for (size_t sell_index = buy_index + 1; sell_index < prices.size(); ++sell_index)
-            {
-                const int diff = prices[sell_index] - buy_price;
-                max_diff = std::max(max_diff, diff);
-            }
+            const int cur_price = prices[i];
+            if (min_price == -1)
+                min_price = cur_price;
+            const int cur_diff = cur_price - min_price;
+            if (cur_diff > max_diff)
+                max_diff = cur_diff;
+            min_price = std::min(min_price, cur_price);
         }
         return max_diff;
     }

@@ -7,9 +7,8 @@ public:
     {
         int min_price = -1;
         int max_diff = 0;
-        for (size_t i = 0; i < prices.size(); ++i)
+        for (const int cur_price : prices)
         {
-            const int cur_price = prices[i];
             if (min_price == -1)
                 min_price = cur_price;
             max_diff = std::max(max_diff, cur_price - min_price);

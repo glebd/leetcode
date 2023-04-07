@@ -10,7 +10,7 @@ public:
     {
         std::unordered_map<char, int> freq;
         // build character frequency map
-        for (const char ch : s)
+        for (const char ch: s)
         {
             if (freq.find(ch) == freq.end())
             {
@@ -22,24 +22,19 @@ public:
             }
         }
         int max_len = 0;
-        int middle = 0;
         // check all character frequencies
-        for (const auto& [ch, n] : freq)
+        bool middle = false;
+        for (const auto& [ch, n]: freq)
         {
-            if (n % 2 == 0)
+            // get no. of chars that can be paired
+            max_len += (n / 2) * 2;
+            if (!middle && max_len % 2 == 0 && n % 2 != 0)
             {
-                // we have pair(s) of chars
-                max_len += n;
-            }
-            else
-            {
-                // odd means there will be a char in the middle
-                middle = 1;
-                // get no. of chars that can be paired
-                max_len += (n / 2) * 2;
+                ++max_len;
+                middle = true;
             }
         }
-        return max_len + middle;
+        return max_len;
     }
 };
 

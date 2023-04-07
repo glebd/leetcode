@@ -1,14 +1,14 @@
 #include <gtest/gtest.h>
 
 #include <string>
-#include <map>
+#include <unordered_map>
 
 class Solution
 {
 public:
     static int longestPalindrome(std::string s)
     {
-        std::map<char, int> freq;
+        std::unordered_map<char, int> freq;
         // build character frequency map
         for (const char ch : s)
         {

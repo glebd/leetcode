@@ -6,7 +6,7 @@
 class Solution
 {
 public:
-    static int longestPalindrome(std::string s)
+    static int longestPalindrome(std::string const& s)
     {
         std::vector<int> freq(128);
         // build character frequency map

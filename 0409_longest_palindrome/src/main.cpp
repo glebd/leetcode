@@ -10,7 +10,7 @@ public:
     {
         std::vector<int> freq(128);
         // build character frequency map
-        for (const char ch: s)
+        for (char const ch: s)
         {
             ++freq[ch];
         }

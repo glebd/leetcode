@@ -1,14 +1,13 @@
 #include <gtest/gtest.h>
 
 #include <string>
-#include <array>
 
 class Solution
 {
 public:
     static int longestPalindrome(std::string const& s)
     {
-        std::array<int, 128> freq = {};
+        int freq[128] = {};
         // build character frequency map
         for (char const ch: s)
         {

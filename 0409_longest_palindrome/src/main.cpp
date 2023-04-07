@@ -18,7 +18,7 @@ public:
             }
             else
             {
-                freq[ch] = freq[ch] + 1;
+                ++freq[ch];
             }
         }
         int max_len = 0;

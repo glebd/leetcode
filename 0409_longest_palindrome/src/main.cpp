@@ -1,30 +1,23 @@
 #include <gtest/gtest.h>
 
 #include <string>
-#include <unordered_map>
+#include <vector>
 
 class Solution
 {
 public:
     static int longestPalindrome(std::string s)
     {
-        std::unordered_map<char, int> freq;
+        std::vector<int> freq(128);
         // build character frequency map
         for (const char ch: s)
         {
-            if (freq.find(ch) == freq.end())
-            {
-                freq.insert({ch, 1});
-            }
-            else
-            {
-                ++freq[ch];
-            }
+            ++freq[ch];
         }
         int max_len = 0;
         // check all character frequencies
         bool middle = false;
-        for (const auto& [ch, n]: freq)
+        for (int const n: freq)
         {
             // get no. of chars that can be paired
             max_len += (n / 2) * 2;

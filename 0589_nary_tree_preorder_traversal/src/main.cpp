@@ -11,13 +11,11 @@ public:
 
     Node() = default;
 
-    explicit Node(int _val)
-        : val(_val)
+    explicit Node(int _val) : val(_val)
     {
     }
 
-    Node(int _val, std::vector<Node*> _children)
-        : val(_val), children(std::move(_children))
+    Node(int _val, std::vector<Node*> _children) : val(_val), children(std::move(_children))
     {
     }
 };

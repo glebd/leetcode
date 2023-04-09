@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include <vector>
+#include <memory>
 
 //
 // *** FROM LEETCODE ***
@@ -34,6 +35,15 @@ public:
         return {};
     }
 };
+
+//
+// *** HELPER FUNCTIONS ***
+//
+
+auto value2node(const int value)
+{
+    return std::make_unique<Node>(value);
+}
 
 //
 // *** TESTS ***

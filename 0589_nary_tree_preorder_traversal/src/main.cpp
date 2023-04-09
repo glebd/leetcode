@@ -94,3 +94,8 @@ TEST(Tree, Test2)
     auto actual = Solution::preorder(nullptr);
     ASSERT_EQ(actual, expected);
 }
+
+TEST(Tree, Empty)
+{
+    ASSERT_EQ(Solution::preorder(nullptr), std::vector<int>{});
+}

@@ -20,6 +20,15 @@ public:
     }
 };
 
+class Solution
+{
+public:
+    static std::vector<int> preorder(Node* root)
+    {
+        return {};
+    }
+};
+
 TEST(Tree, Test1)
 {
     ASSERT_TRUE(true);

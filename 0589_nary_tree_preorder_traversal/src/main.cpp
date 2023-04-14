@@ -27,7 +27,7 @@ struct Node
     }
 };
 
-class Solution
+class RecSolution
 {
 public:
     static void traverse(Node const* const node, std::vector<int>& values)
@@ -182,7 +182,7 @@ TEST(Helper, Test2)
     ASSERT_EQ(nodes[0][0]->children.size(), 4);
 }
 
-TEST(Tree, Test1)
+TEST(RecSolution, Test1)
 {
     //               ┌───┐
     //        ┌──────│ 1 │──────┐
@@ -203,11 +203,11 @@ TEST(Tree, Test1)
     auto nodes = values2nodes(tree);
     std::vector<int> expected{1, 3, 5, 6, 2, 4};
     Node* root = nodes2root(nodes);
-    auto actual = Solution::preorder(root);
+    auto actual = RecSolution::preorder(root);
     ASSERT_EQ(actual, expected);
 }
 
-TEST(Tree, Test2)
+TEST(RecSolution, Test2)
 {
     //                    ┌───┐
     //   ┌───────────┬────│ 1 │────┬───────────┐
@@ -238,11 +238,11 @@ TEST(Tree, Test2)
     auto nodes = values2nodes(tree);
     std::vector<int> expected{1, 2, 3, 6, 7, 11, 14, 4, 8, 12, 5, 9, 13, 10};
     Node* root = nodes2root(nodes);
-    auto actual = Solution::preorder(root);
+    auto actual = RecSolution::preorder(root);
     ASSERT_EQ(actual, expected);
 }
 
-TEST(Tree, Empty)
+TEST(RecSolution, Empty)
 {
-    ASSERT_EQ(Solution::preorder(nullptr), std::vector<int>{});
+    ASSERT_EQ(RecSolution::preorder(nullptr), std::vector<int>{});
 }

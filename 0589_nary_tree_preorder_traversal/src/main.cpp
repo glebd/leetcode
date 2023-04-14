@@ -92,6 +92,15 @@ auto values2nodes(const std::vector<int>& values)
     return all_nodes;
 }
 
+Node* nodes2root(const std::vector<std::vector<std::unique_ptr<Node>>>& nodes)
+{
+    if (nodes.empty())
+        return nullptr;
+    if (nodes[0].empty())
+        return nullptr;
+    return nodes[0][0].get();
+}
+
 //
 // *** TESTS ***
 //
@@ -181,7 +190,8 @@ TEST(Tree, Test1)
     std::vector<int> tree{1, -1, 3, 2, 4, -1, 5, 6};
     auto nodes = values2nodes(tree);
     std::vector<int> expected{1, 3, 5, 6, 2, 4};
-    auto actual = Solution::preorder(nullptr);
+    Node* root = nodes2root(nodes);
+    auto actual = Solution::preorder(root);
     ASSERT_EQ(actual, expected);
 }
 
@@ -215,7 +225,8 @@ TEST(Tree, Test2)
     std::vector<int> tree{1, -1, 2, 3, 4, 5, -1, -1, 6, 7, -1, 8, -1, 9, 10, -1, -1, 11, -1, 12, -1, 13, -1, -1, 14};
     auto nodes = values2nodes(tree);
     std::vector<int> expected{1, 2, 3, 6, 7, 11, 14, 4, 8, 12, 5, 9, 13, 10};
-    auto actual = Solution::preorder(nullptr);
+    Node* root = nodes2root(nodes);
+    auto actual = Solution::preorder(root);
     ASSERT_EQ(actual, expected);
 }
 

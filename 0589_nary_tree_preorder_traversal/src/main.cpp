@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
 
-#include <vector>
+#include <algorithm>
 #include <memory>
+#include <vector>
 
 //
 // *** FROM LEETCODE ***
@@ -10,9 +11,8 @@
 //
 
 // Definition for a Node.
-class Node
+struct Node
 {
-public:
     int val{};
     std::vector<Node*> children{};
 

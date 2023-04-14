@@ -32,8 +32,6 @@ class Solution
 public:
     static void traverse(Node const* const node, std::vector<int>& values)
     {
-        if (node == nullptr)
-            return;
         values.push_back(node->val);
         for (Node const* const child: node->children)
         {
@@ -44,7 +42,8 @@ public:
     static std::vector<int> preorder(Node* root)
     {
         std::vector<int> values;
-        traverse(root, values);
+        if (root)
+            traverse(root, values);
         return values;
     }
 };

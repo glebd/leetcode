@@ -96,6 +96,71 @@ auto values2nodes(const std::vector<int>& values)
 // *** TESTS ***
 //
 
+TEST(Helper, Test1)
+{
+    //               ┌───┐
+    //        ┌──────│ 1 │──────┐
+    //        │      └───┘      │
+    //        │        │        │
+    //        ▼        ▼        ▼
+    //      ┌───┐    ┌───┐    ┌───┐
+    //   ┌──│ 3 │──┐ │ 2 │    │ 4 │
+    //   │  └───┘  │ └───┘    └───┘
+    //   │         │
+    //   ▼         ▼
+    // ┌───┐     ┌───┐
+    // │ 5 │     │ 6 │
+    // └───┘     └───┘
+
+    // -1 means <null> in test data, as node value is 0 <= val <= 10^4
+    std::vector<int> tree{1, -1, 3, 2, 4, -1, 5, 6};
+    auto nodes = values2nodes(tree);
+    ASSERT_EQ(nodes.size(), 3); // no. of levels
+    ASSERT_EQ(nodes[0].size(), 1);
+    ASSERT_EQ(nodes[1].size(), 3);
+    ASSERT_EQ(nodes[2].size(), 2);
+    ASSERT_EQ(nodes[0][0]->children.size(), 3);
+    ASSERT_EQ(nodes[1][0]->children.size(), 2);
+}
+
+TEST(Helper, Test2)
+{
+    //                    ┌───┐
+    //   ┌───────────┬────│ 1 │────┬───────────┐
+    //   │           │    └───┘    │           │
+    //   │           │             │           │
+    //   ▼           ▼             ▼           ▼
+    // ┌───┐       ┌───┐         ┌───┐       ┌───┐
+    // │ 2 │     ┌─│ 3 │─┐       │ 4 │     ┌─│ 5 │─┐
+    // └───┘     │ └───┘ │       └───┘     │ └───┘ │
+    //           │       │         │       │       │
+    //           ▼       ▼         ▼       ▼       ▼
+    //         ┌───┐   ┌───┐     ┌───┐   ┌───┐   ┌───┐
+    //         │ 6 │   │ 7 │     │ 8 │   │ 9 │   │10 │
+    //         └───┘   └───┘     └───┘   └───┘   └───┘
+    //                   │         │       │
+    //                   ▼         ▼       ▼
+    //                 ┌───┐     ┌───┐   ┌───┐
+    //                 │11 │     │12 │   │13 │
+    //                 └───┘     └───┘   └───┘
+    //                   │
+    //                   ▼
+    //                 ┌───┐
+    //                 │14 │
+    //                 └───┘
+
+    // -1 means <null> in test data, as node value is 0 <= val <= 10^4
+    std::vector<int> tree{1, -1, 2, 3, 4, 5, -1, -1, 6, 7, -1, 8, -1, 9, 10, -1, -1, 11, -1, 12, -1, 13, -1, -1, 14};
+    auto nodes = values2nodes(tree);
+    ASSERT_EQ(nodes.size(), 5); // no. of levels
+    ASSERT_EQ(nodes[0].size(), 1);
+    ASSERT_EQ(nodes[1].size(), 4);
+    ASSERT_EQ(nodes[2].size(), 5);
+    ASSERT_EQ(nodes[3].size(), 3);
+    ASSERT_EQ(nodes[4].size(), 1);
+    ASSERT_EQ(nodes[0][0]->children.size(), 4);
+}
+
 TEST(Tree, Test1)
 {
     //               ┌───┐
@@ -148,6 +213,7 @@ TEST(Tree, Test2)
 
     // -1 means <null> in test data, as node value is 0 <= val <= 10^4
     std::vector<int> tree{1, -1, 2, 3, 4, 5, -1, -1, 6, 7, -1, 8, -1, 9, 10, -1, -1, 11, -1, 12, -1, 13, -1, -1, 14};
+    auto nodes = values2nodes(tree);
     std::vector<int> expected{1, 2, 3, 6, 7, 11, 14, 4, 8, 12, 5, 9, 13, 10};
     auto actual = Solution::preorder(nullptr);
     ASSERT_EQ(actual, expected);

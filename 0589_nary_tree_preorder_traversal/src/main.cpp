@@ -257,7 +257,6 @@ TEST(RecSolution, Empty)
     ASSERT_EQ(RecSolution::preorder(nullptr), std::vector<int>{});
 }
 
-
 TEST(IterSolution, Test1)
 {
     //               ┌───┐

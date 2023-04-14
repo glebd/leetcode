@@ -48,9 +48,9 @@ auto value2node(const int value)
 auto values2nodes(const std::vector<int>& values)
 {
     std::vector<std::vector<std::unique_ptr<Node>>> all_nodes;
-    int level = 0;// tree level we're currently processing
+    int level = 0; // tree level we're currently processing
     std::vector<std::unique_ptr<Node>> cur_level_nodes;
-    int parent_index = -1;// index of up-level node to add children to
+    int parent_index = -1; // index of up-level node to add children to
     for (const int value: values)
     {
         // 1st value of -1 increments depth, but only if the current level is not empty
@@ -71,7 +71,7 @@ auto values2nodes(const std::vector<int>& values)
             // check that we're at level 0
             // check that we haven't run out of parent nodes
             ++parent_index;
-            if (level == 0 || parent_index >= all_nodes[level - 1].size())// ran out of parents
+            if (level == 0 || parent_index >= all_nodes[level - 1].size()) // ran out of parents
             {
                 // add current level nodes to all nodes
                 all_nodes.emplace_back(std::move(cur_level_nodes));

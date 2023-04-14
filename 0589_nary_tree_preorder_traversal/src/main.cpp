@@ -52,6 +52,10 @@ public:
 class IterSolution
 {
 public:
+    // Let's start from the root and then at each iteration pop the current node out of the stack and push its child
+    // nodes. In the implemented strategy we push nodes into output list following the order Top->Bottom and
+    // Left->Right, that naturally reproduces preorder traversal.
+    // https://leetcode.com/problems/n-ary-tree-preorder-traversal/editorial/
     static std::vector<int> preorder(Node* root)
     {
         std::vector<int> values;

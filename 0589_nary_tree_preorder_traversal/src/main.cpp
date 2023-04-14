@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <memory>
+#include <stack>
 #include <vector>
 
 //
@@ -54,6 +55,19 @@ public:
     static std::vector<int> preorder(Node* root)
     {
         std::vector<int> values;
+        if (!root)
+            return values;
+        std::stack<Node*> stack;
+        stack.push(root);
+        while (!stack.empty())
+        {
+            Node* node = stack.top();
+            stack.pop();
+            values.push_back(node->val);
+            std::reverse(node->children.begin(), node->children.end());
+            for (Node* child : node->children)
+                stack.push(child);
+        }
         return values;
     }
 };

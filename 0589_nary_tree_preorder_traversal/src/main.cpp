@@ -65,8 +65,7 @@ public:
             stack.pop();
             values.push_back(node->val);
             std::reverse(node->children.begin(), node->children.end());
-            for (Node* child : node->children)
-                stack.push(child);
+            for (Node* child: node->children) stack.push(child);
         }
         return values;
     }

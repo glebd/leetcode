@@ -48,6 +48,16 @@ public:
     }
 };
 
+class IterSolution
+{
+public:
+    static std::vector<int> preorder(Node* root)
+    {
+        std::vector<int> values;
+        return values;
+    }
+};
+
 //
 // *** HELPER FUNCTIONS ***
 //
@@ -245,4 +255,70 @@ TEST(RecSolution, Test2)
 TEST(RecSolution, Empty)
 {
     ASSERT_EQ(RecSolution::preorder(nullptr), std::vector<int>{});
+}
+
+
+TEST(IterSolution, Test1)
+{
+    //               ┌───┐
+    //        ┌──────│ 1 │──────┐
+    //        │      └───┘      │
+    //        │        │        │
+    //        ▼        ▼        ▼
+    //      ┌───┐    ┌───┐    ┌───┐
+    //   ┌──│ 3 │──┐ │ 2 │    │ 4 │
+    //   │  └───┘  │ └───┘    └───┘
+    //   │         │
+    //   ▼         ▼
+    // ┌───┐     ┌───┐
+    // │ 5 │     │ 6 │
+    // └───┘     └───┘
+
+    // -1 means <null> in test data, as node value is 0 <= val <= 10^4
+    std::vector<int> tree{1, -1, 3, 2, 4, -1, 5, 6};
+    auto nodes = values2nodes(tree);
+    std::vector<int> expected{1, 3, 5, 6, 2, 4};
+    Node* root = nodes2root(nodes);
+    auto actual = IterSolution::preorder(root);
+    ASSERT_EQ(actual, expected);
+}
+
+TEST(IterSolution, Test2)
+{
+    //                    ┌───┐
+    //   ┌───────────┬────│ 1 │────┬───────────┐
+    //   │           │    └───┘    │           │
+    //   │           │             │           │
+    //   ▼           ▼             ▼           ▼
+    // ┌───┐       ┌───┐         ┌───┐       ┌───┐
+    // │ 2 │     ┌─│ 3 │─┐       │ 4 │     ┌─│ 5 │─┐
+    // └───┘     │ └───┘ │       └───┘     │ └───┘ │
+    //           │       │         │       │       │
+    //           ▼       ▼         ▼       ▼       ▼
+    //         ┌───┐   ┌───┐     ┌───┐   ┌───┐   ┌───┐
+    //         │ 6 │   │ 7 │     │ 8 │   │ 9 │   │10 │
+    //         └───┘   └───┘     └───┘   └───┘   └───┘
+    //                   │         │       │
+    //                   ▼         ▼       ▼
+    //                 ┌───┐     ┌───┐   ┌───┐
+    //                 │11 │     │12 │   │13 │
+    //                 └───┘     └───┘   └───┘
+    //                   │
+    //                   ▼
+    //                 ┌───┐
+    //                 │14 │
+    //                 └───┘
+
+    // -1 means <null> in test data, as node value is 0 <= val <= 10^4
+    std::vector<int> tree{1, -1, 2, 3, 4, 5, -1, -1, 6, 7, -1, 8, -1, 9, 10, -1, -1, 11, -1, 12, -1, 13, -1, -1, 14};
+    auto nodes = values2nodes(tree);
+    std::vector<int> expected{1, 2, 3, 6, 7, 11, 14, 4, 8, 12, 5, 9, 13, 10};
+    Node* root = nodes2root(nodes);
+    auto actual = IterSolution::preorder(root);
+    ASSERT_EQ(actual, expected);
+}
+
+TEST(IterSolution, Empty)
+{
+    ASSERT_EQ(IterSolution::preorder(nullptr), std::vector<int>{});
 }

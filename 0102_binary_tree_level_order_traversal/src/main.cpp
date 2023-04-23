@@ -23,7 +23,11 @@ class Solution
 public:
     static std::vector<std::vector<int>> levelOrder(TreeNode* root)
     {
-        return {{}};
+        std::vector<std::vector<int>> values;
+        if (root == nullptr)
+            return {{}};
+        values.push_back({root->val});
+        return values;
     }
 };
 
@@ -52,6 +56,6 @@ TEST(BinTreeTraversal, Test2)
 TEST(BinTreeTraversal, TestEmpty)
 {
     std::vector<std::vector<int>> expected = {{}};
-    auto actual = Solution::levelOrder({});
+    auto actual = Solution::levelOrder(nullptr);
     ASSERT_EQ(actual, expected);
 }

@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include <memory>
 #include <vector>
 
 // Definition for a binary tree node.
@@ -20,9 +21,9 @@ struct TreeNode
 class Solution
 {
 public:
-    std::vector<std::vector<int>> levelOrder(TreeNode* root)
+    static std::vector<std::vector<int>> levelOrder(TreeNode* root)
     {
-        return {};
+        return {{}};
     }
 };
 
@@ -30,5 +31,27 @@ TEST(BinTreeTraversal, Test1)
 {
     std::vector<int> nodes = {3, 9, 20, -1, -1, 15, 7};
     std::vector<std::vector<int>> expected = {{3}, {9, 20}, {15, 7}};
-    ASSERT_TRUE(true);
+    auto l3left = std::make_unique<TreeNode>(15);
+    auto l3right = std::make_unique<TreeNode>(7);
+    auto l2left = std::make_unique<TreeNode>(9);
+    auto l2right = std::make_unique<TreeNode>(20, l3left.get(), l3right.get());
+    auto root = std::make_unique<TreeNode>(3, l2left.get(), l2right.get());
+    auto actual = Solution::levelOrder(root.get());
+    ASSERT_EQ(actual, expected);
+}
+
+TEST(BinTreeTraversal, Test2)
+{
+    std::vector<int> nodes = {1};
+    std::vector<std::vector<int>> expected = {{1}};
+    auto root = std::make_unique<TreeNode>(1);
+    auto actual = Solution::levelOrder(root.get());
+    ASSERT_EQ(actual, expected);
+}
+
+TEST(BinTreeTraversal, TestEmpty)
+{
+    std::vector<std::vector<int>> expected = {{}};
+    auto actual = Solution::levelOrder({});
+    ASSERT_EQ(actual, expected);
 }

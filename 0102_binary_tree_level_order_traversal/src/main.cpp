@@ -21,34 +21,22 @@ struct TreeNode
 class Solution
 {
 public:
-    static void traverse(TreeNode* left, TreeNode* right, std::vector<std::vector<int>>& values, int const level)
+    static void traverse(TreeNode* node, std::vector<std::vector<int>>& values, int const level)
     {
-        std::vector<int> level_values;
-        if (left != nullptr)
-            level_values.push_back(left->val);
-        if (right != nullptr)
-            level_values.push_back(right->val);
-        if (!level_values.empty())
-        {
-            if (level >= values.size())
-                values.emplace_back(std::move(level_values));
-            else
-                values[level].insert(values[level].end(), level_values.begin(), level_values.end());
-        }
-        if (left != nullptr)
-            traverse(left->left, left->right, values, level + 1);
-        if (right != nullptr)
-            traverse(right->left, right->right, values, level + 1);
+        if (node == nullptr)
+            return;
+        if (level >= values.size())
+            values.emplace_back();
+        auto& level_values = values[level];
+        level_values.push_back(node->val);
+        traverse(node->left, values, level + 1);
+        traverse(node->right, values, level + 1);
     }
 
     static std::vector<std::vector<int>> levelOrder(TreeNode* root)
     {
         std::vector<std::vector<int>> values;
-        if (root == nullptr)
-            return values;
-        values.push_back({root->val});
-        int level = 1;
-        traverse(root->left, root->right, values, level);
+        traverse(root, values, 0);
         return values;
     }
 };

@@ -29,7 +29,12 @@ public:
         if (right != nullptr)
             level_values.push_back(right->val);
         if (!level_values.empty())
-            values.push_back(level_values);
+        {
+            if (level >= values.size())
+                values.push_back(level_values);
+            else
+                values[level].insert(values[level].end(), level_values.begin(), level_values.end());
+        }
         if (left != nullptr)
             traverse(left->left, left->right, values, level + 1);
         if (right != nullptr)
@@ -66,6 +71,19 @@ TEST(BinTreeTraversal, Test2)
     std::vector<int> nodes = {1};
     std::vector<std::vector<int>> expected = {{1}};
     auto root = std::make_unique<TreeNode>(1);
+    auto actual = Solution::levelOrder(root.get());
+    ASSERT_EQ(actual, expected);
+}
+
+TEST(BinTreeTraversal, Test4)
+{
+    std::vector<int> nodes = {1, 2, 3, 4, -1, -1, 5};
+    std::vector<std::vector<int>> expected = {{1}, {2, 3}, {4, 5}};
+    auto l3leftleft = std::make_unique<TreeNode>(4);
+    auto l3rightright = std::make_unique<TreeNode>(5);
+    auto l2left = std::make_unique<TreeNode>(2, l3leftleft.get(), nullptr);
+    auto l2right = std::make_unique<TreeNode>(3, nullptr, l3rightright.get());
+    auto root = std::make_unique<TreeNode>(1, l2left.get(), l2right.get());
     auto actual = Solution::levelOrder(root.get());
     ASSERT_EQ(actual, expected);
 }

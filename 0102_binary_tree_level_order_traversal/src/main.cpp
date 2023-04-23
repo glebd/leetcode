@@ -28,5 +28,7 @@ public:
 
 TEST(BinTreeTraversal, Test1)
 {
+    std::vector<int> nodes = {3, 9, 20, -1, -1, 15, 7};
+    std::vector<std::vector<int>> expected = {{3}, {9, 20}, {15, 7}};
     ASSERT_TRUE(true);
 }

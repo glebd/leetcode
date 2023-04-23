@@ -31,7 +31,7 @@ public:
         if (!level_values.empty())
         {
             if (level >= values.size())
-                values.push_back(level_values);
+                values.emplace_back(std::move(level_values));
             else
                 values[level].insert(values[level].end(), level_values.begin(), level_values.end());
         }

@@ -40,7 +40,7 @@ public:
     {
         std::vector<std::vector<int>> values;
         if (root == nullptr)
-            return {{}};
+            return values;
         values.push_back({root->val});
         int level = 1;
         traverse(root->left, root->right, values, level);
@@ -72,7 +72,7 @@ TEST(BinTreeTraversal, Test2)
 
 TEST(BinTreeTraversal, TestEmpty)
 {
-    std::vector<std::vector<int>> expected = {{}};
+    std::vector<std::vector<int>> expected = {};
     auto actual = Solution::levelOrder(nullptr);
     ASSERT_EQ(actual, expected);
 }

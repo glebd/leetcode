@@ -21,12 +21,29 @@ struct TreeNode
 class Solution
 {
 public:
+    static void traverse(TreeNode* left, TreeNode* right, std::vector<std::vector<int>>& values, int const level)
+    {
+        std::vector<int> level_values;
+        if (left != nullptr)
+            level_values.push_back(left->val);
+        if (right != nullptr)
+            level_values.push_back(right->val);
+        if (!level_values.empty())
+            values.push_back(level_values);
+        if (left != nullptr)
+            traverse(left->left, left->right, values, level + 1);
+        if (right != nullptr)
+            traverse(right->left, right->right, values, level + 1);
+    }
+
     static std::vector<std::vector<int>> levelOrder(TreeNode* root)
     {
         std::vector<std::vector<int>> values;
         if (root == nullptr)
             return {{}};
         values.push_back({root->val});
+        int level = 1;
+        traverse(root->left, root->right, values, level);
         return values;
     }
 };

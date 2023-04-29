@@ -2,6 +2,10 @@
 
 #include <vector>
 
+// https://leetcode.com/explore/learn/card/binary-search/136/template-analysis/935/
+
+// https://leetcode.com/problems/binary-search/
+
 class Solution
 {
 public:

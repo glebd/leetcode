@@ -5,22 +5,22 @@
 class Solution
 {
 public:
-    static int search_range(const std::vector<int>& nums, int start, int end, int target)
+    static int search_range(const std::vector<int>& nums, int start, int size, int target)
     {
-        if (start >= end)
+        if (size <= 0)
             return -1;
-        int mid = start + (end - start) / 2;
+        int mid = start + size / 2;
         int mid_num = nums[mid];
         if (mid_num == target)
             return mid;
         if (target < mid_num)
-            return search_range(nums, start, mid, target);
-        return search_range(nums, mid + 1, end, target);
+            return search_range(nums, start, size / 2, target);
+        return search_range(nums, mid + 1, size / 2 - 1, target);
     }
 
     static int search(std::vector<int>& nums, int target)
     {
-        return search_range(nums, 0, static_cast<int>(nums.size()) - 1, target);
+        return search_range(nums, 0, static_cast<int>(nums.size()), target);
     }
 };
 

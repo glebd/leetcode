@@ -9,13 +9,14 @@ public:
     {
         if (size <= 0)
             return -1;
-        int mid = start + size / 2;
+        int half = size / 2;
+        int mid = start + half;
         int mid_num = nums[mid];
         if (mid_num == target)
             return mid;
         if (target < mid_num)
-            return search_range(nums, start, size / 2, target);
-        return search_range(nums, mid + 1, size - size / 2 - 1, target);
+            return search_range(nums, start, half, target);
+        return search_range(nums, mid + 1, size - half - 1, target);
     }
 
     static int search(std::vector<int>& nums, int target)

@@ -47,3 +47,9 @@ TEST(BinarySearch, TestSingle)
     std::vector<int> data = {5};
     ASSERT_EQ(Solution::search(data, 5), 0);
 }
+
+TEST(BinarySearch, Test34)
+{
+    std::vector<int> data = {-1, 0, 5};
+    ASSERT_EQ(Solution::search(data, 5), 2);
+}

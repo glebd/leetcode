@@ -1,9 +1,32 @@
-#include <iostream>
+#include <gtest/gtest.h>
 
-using namespace std;
+// https://leetcode.com/problems/first-bad-version/
 
-int main(int argc, char** argv)
+// The API isBadVersion is defined for you.
+bool isBadVersion(int version)
 {
-    cout << "hello world!" << endl;
-    return 0;
+    return false;
+}
+
+class Solution
+{
+public:
+    static int firstBadVersion(int n)
+    {
+        return 0;
+    }
+};
+
+// Input: n = 5, bad = 4
+// Output: 4
+TEST(FirstBadVersion, Test1)
+{
+    ASSERT_EQ(Solution::firstBadVersion(5), 4);
+}
+
+// Input: n = 1, bad = 1
+// Output: 1
+TEST(FirstBadVersion, Test2)
+{
+    ASSERT_EQ(Solution::firstBadVersion(1), 1);
 }

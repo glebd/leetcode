@@ -26,9 +26,7 @@ public:
             else
                 left = mid + 1;
         }
-        if (isBadVersion(left))
-            return left;
-        return mid;
+        return left;
     }
 };
 

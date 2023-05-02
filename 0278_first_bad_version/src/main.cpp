@@ -15,9 +15,22 @@ class Solution
 public:
     static int firstBadVersion(int n, const std::function<bool(int)>& isBadVersion)
     {
-        if (isBadVersion(n))
-            return n;
-        return 0;
+        int left = 1;
+        int right = n;
+        int mid{};
+        while (left < right)
+        {
+            mid = left + (right - left) / 2;
+            if (isBadVersion(mid))
+                right = mid;
+            else if (left == mid)
+                return right;
+            else
+                left = mid;
+        }
+        if (isBadVersion(left))
+            return left;
+        return mid;
     }
 };
 
@@ -33,4 +46,18 @@ TEST(FirstBadVersion, Test1)
 TEST(FirstBadVersion, Test2)
 {
     ASSERT_EQ(Solution::firstBadVersion(1, [](int n) { return n >= 1; }), 1);
+}
+
+// Input: n = 2, bad = 2
+// Output: 2
+TEST(FirstBadVersion, Test3)
+{
+    ASSERT_EQ(Solution::firstBadVersion(2, [](int n) { return n >= 2; }), 2);
+}
+
+// Input: n = 2126753390, bad = 1702766719
+// Output: 1702766719
+TEST(FirstBadVersion, Test20)
+{
+    ASSERT_EQ(Solution::firstBadVersion(2126753390, [](int n) { return n >= 1702766719; }), 1702766719);
 }

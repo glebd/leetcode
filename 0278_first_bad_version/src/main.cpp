@@ -3,6 +3,8 @@
 
 // https://leetcode.com/problems/first-bad-version/
 
+// https://leetcode.com/explore/learn/card/binary-search/126/template-ii/947/
+
 // The API isBadVersion is defined for you.
 
 //bool isBadVersion(int version)

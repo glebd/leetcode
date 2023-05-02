@@ -23,10 +23,8 @@ public:
             mid = left + (right - left) / 2;
             if (isBadVersion(mid))
                 right = mid;
-            else if (left == mid)
-                return right;
             else
-                left = mid;
+                left = mid + 1;
         }
         if (isBadVersion(left))
             return left;

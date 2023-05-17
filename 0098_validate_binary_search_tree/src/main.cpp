@@ -74,3 +74,28 @@ TEST(ValidateBinarySearchTree, Test2)
     auto root = std::make_unique<TreeNode>(5, node1.get(), node4.get());
     ASSERT_FALSE(Solution::isValidBST(root.get()));
 }
+
+//        ┌───┐
+//   ┌────│ 5 │────┐
+//   │    └───┘    │
+//   │             │
+//   ▼             ▼
+// ┌───┐         ┌───┐
+// │ 4 │    ┌────│ 6 │────┐
+// └───┘    │    └───┘    │
+//          │             │
+//          ▼             ▼
+//        ┌───┐         ┌───┐
+//        │ 3 │         │ 7 │
+//        └───┘         └───┘
+
+TEST(ValidateBinarySearchTree, Test75)
+{
+    [[maybe_unused]] std::vector<int> values = {5,4,6,-1,-1,3,7};
+    auto node3 = std::make_unique<TreeNode>(3);
+    auto node7 = std::make_unique<TreeNode>(7);
+    auto node6 = std::make_unique<TreeNode>(6, node3.get(), node7.get());
+    auto node4 = std::make_unique<TreeNode>(4);
+    auto root = std::make_unique<TreeNode>(5, node4.get(), node6.get());
+    ASSERT_FALSE(Solution::isValidBST(root.get()));
+}

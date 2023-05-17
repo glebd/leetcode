@@ -39,6 +39,30 @@ public:
     }
 };
 
+class SolutionInOrder
+{
+public:
+    long prev{std::numeric_limits<long>::min()};
+
+    bool inorder(TreeNode* node)
+    {
+        if (node == nullptr)
+            return true;
+        if (!inorder(node->left))
+            return false;
+        auto val = node->val;
+        if (val <= prev)
+            return false;
+        prev = val;
+        return inorder(node->right);
+    }
+
+    bool isValidBST(TreeNode* root)
+    {
+        return inorder(root);
+    }
+};
+
 //        ┌───┐
 //   ┌────│ 2 │────┐
 //   │    └───┘    │
@@ -55,6 +79,8 @@ TEST(ValidateBinarySearchTree, Test1)
     auto right = std::make_unique<TreeNode>(3);
     auto root = std::make_unique<TreeNode>(2, left.get(), right.get());
     ASSERT_TRUE(Solution::isValidBST(root.get()));
+    SolutionInOrder solution;
+    ASSERT_TRUE(solution.isValidBST(root.get()));
 }
 
 //        ┌───┐
@@ -80,6 +106,8 @@ TEST(ValidateBinarySearchTree, Test2)
     auto node1 = std::make_unique<TreeNode>(1);
     auto root = std::make_unique<TreeNode>(5, node1.get(), node4.get());
     ASSERT_FALSE(Solution::isValidBST(root.get()));
+    SolutionInOrder solution;
+    ASSERT_FALSE(solution.isValidBST(root.get()));
 }
 
 //        ┌───┐
@@ -105,6 +133,8 @@ TEST(ValidateBinarySearchTree, Test75)
     auto node4 = std::make_unique<TreeNode>(4);
     auto root = std::make_unique<TreeNode>(5, node4.get(), node6.get());
     ASSERT_FALSE(Solution::isValidBST(root.get()));
+    SolutionInOrder solution;
+    ASSERT_FALSE(solution.isValidBST(root.get()));
 }
 
 //           ┌───┐
@@ -136,6 +166,8 @@ TEST(ValidateBinarySearchTree, Test76)
     auto node47 = std::make_unique<TreeNode>(47, nullptr, node56.get());
     auto root = std::make_unique<TreeNode>(32, node26.get(), node47.get());
     ASSERT_FALSE(Solution::isValidBST(root.get()));
+    SolutionInOrder solution;
+    ASSERT_FALSE(solution.isValidBST(root.get()));
 }
 
 TEST(ValidateBinarySearchTree, Test80)
@@ -161,4 +193,6 @@ TEST(ValidateBinarySearchTree, Test80)
     // Level 1
     auto root = std::make_unique<TreeNode>(120, node70.get(), node140.get());
     ASSERT_FALSE(Solution::isValidBST(root.get()));
+    SolutionInOrder solution;
+    ASSERT_FALSE(solution.isValidBST(root.get()));
 }

@@ -96,6 +96,23 @@ auto values2nodes(const std::vector<int>& values)
                     parent_node->left = node.get();
                 else
                     parent_node->right = node.get();
+                if (!left_child)
+                {
+                    // at the right child, skip and go to next parent
+                    // check that we're at level 0
+                    // check that we haven't run out of parent nodes
+                    ++parent_index;
+                    if (level == 0 || parent_index >= all_nodes[level - 1].size()) // ran out of parents
+                    {
+                        // add current level nodes to all nodes
+                        all_nodes.emplace_back(std::move(cur_level_nodes));
+                        // increment current level
+                        ++level;
+                        // clear current level nodes
+                        cur_level_nodes.clear();
+                        parent_index = 0;
+                    }
+                }
                 left_child = !left_child;
             }
             else
@@ -110,21 +127,26 @@ auto values2nodes(const std::vector<int>& values)
                 parent_index = 0;
             }
         }
-        else
+        else // -1 marks null child on either left or right of the parent node
         {
-            // check that we're at level 0
-            // check that we haven't run out of parent nodes
-            ++parent_index;
-            if (level == 0 || parent_index >= all_nodes[level - 1].size()) // ran out of parents
+            if (!left_child)
             {
-                // add current level nodes to all nodes
-                all_nodes.emplace_back(std::move(cur_level_nodes));
-                // increment current level
-                ++level;
-                // clear current level nodes
-                cur_level_nodes.clear();
-                parent_index = 0;
+                // at the right child, skip and go to next parent
+                // check that we're at level 0
+                // check that we haven't run out of parent nodes
+                ++parent_index;
+                if (level == 0 || parent_index >= all_nodes[level - 1].size()) // ran out of parents
+                {
+                    // add current level nodes to all nodes
+                    all_nodes.emplace_back(std::move(cur_level_nodes));
+                    // increment current level
+                    ++level;
+                    // clear current level nodes
+                    cur_level_nodes.clear();
+                    parent_index = 0;
+                }
             }
+            left_child = !left_child;
         }
     }
 
@@ -158,7 +180,7 @@ TreeNode* nodes2root(const std::vector<std::vector<std::unique_ptr<TreeNode>>>& 
 TEST(ValidateBinarySearchTree, Test1)
 {
     using namespace binary_tree;
-    [[maybe_unused]] std::vector<int> values = {2, 1, 3};
+    std::vector<int> values = {2, 1, 3};
     auto nodes = values2nodes(values);
     TreeNode* root = nodes2root(nodes);
     ASSERT_TRUE(Solution::isValidBST(root));
@@ -182,15 +204,13 @@ TEST(ValidateBinarySearchTree, Test1)
 
 TEST(ValidateBinarySearchTree, Test2)
 {
-    [[maybe_unused]] std::vector<int> values = {5, 1, 4, -1, -1, 3, 6};
-    auto node3 = std::make_unique<TreeNode>(3);
-    auto node6 = std::make_unique<TreeNode>(6);
-    auto node4 = std::make_unique<TreeNode>(4, node3.get(), node6.get());
-    auto node1 = std::make_unique<TreeNode>(1);
-    auto root = std::make_unique<TreeNode>(5, node1.get(), node4.get());
-    ASSERT_FALSE(Solution::isValidBST(root.get()));
+    using namespace binary_tree;
+    std::vector<int> values = {5, 1, 4, -1, -1, 3, 6};
+    auto nodes = values2nodes(values);
+    TreeNode* root = nodes2root(nodes);
+    ASSERT_FALSE(Solution::isValidBST(root));
     SolutionInOrder solution;
-    ASSERT_FALSE(solution.isValidBST(root.get()));
+    ASSERT_FALSE(solution.isValidBST(root));
 }
 
 //        ┌───┐

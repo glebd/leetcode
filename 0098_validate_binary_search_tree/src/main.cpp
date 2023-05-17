@@ -189,35 +189,3 @@ TEST(ValidateBinarySearchTree, Test80)
     auto root = std::make_unique<TreeNode>(120, node70.get(), node140.get());
     ASSERT_FALSE(Solution::isValidBST(root.get()));
 }
-
-//        ┌───┐
-//   ┌────│ 5 │────┐
-//   │    └───┘    │
-//   │             │
-//   ▼             ▼
-// ┌───┐         ┌───┐
-// │ 4 │    ┌────│ 7 │────┐
-// └───┘    │    └───┘    │
-//          │             │
-//          ▼             ▼
-//        ┌───┐         ┌───┐
-//        │ 6 │     ┌───│ 8 │───┐
-//        └───┘     │   └───┘   │
-//                  │           │
-//                  ▼           ▼
-//                ┌───┐       ┌───┐
-//                │ 7 │       │ 9 │
-//                └───┘       └───┘
-
-TEST(ValidateBinarySearchTree, DISABLED_TestDeepFail)
-{
-    [[maybe_unused]] std::vector<int> values = {5, 4, 7, -1, -1, 6, 8, -1, -1, 7, 9};
-    auto node7_2 = std::make_unique<TreeNode>(7);
-    auto node9 = std::make_unique<TreeNode>(9);
-    auto node8 = std::make_unique<TreeNode>(8, node7_2.get(), node9.get());
-    auto node6 = std::make_unique<TreeNode>(6);
-    auto node7 = std::make_unique<TreeNode>(7, node6.get(), node8.get());
-    auto node4 = std::make_unique<TreeNode>(4);
-    auto root = std::make_unique<TreeNode>(5, node4.get(), node7.get());
-    ASSERT_FALSE(Solution::isValidBST(root.get()));
-}

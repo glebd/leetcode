@@ -167,7 +167,7 @@ TEST(ValidateBinarySearchTree, Test76)
 
 TEST(ValidateBinarySearchTree, Test80)
 {
-    [[maybe_unused]] std::vector<int> values = {120,70,140,50,100,130,160,20,55,75,110,119,135,150,200};
+    [[maybe_unused]] std::vector<int> values = {120, 70, 140, 50, 100, 130, 160, 20, 55, 75, 110, 119, 135, 150, 200};
     // Level 4
     auto node20 = std::make_unique<TreeNode>(20);
     auto node55 = std::make_unique<TreeNode>(55);

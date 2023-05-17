@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <limits>
 #include <memory>
 #include <vector>
 
@@ -20,49 +21,19 @@ struct TreeNode
 class Solution
 {
 public:
-    static bool isValidRightSubtree(TreeNode* root, int val, int root_val)
+    static bool validate(TreeNode* node, long minBound, long maxBound)
     {
-        if (root == nullptr)
+        if (node == nullptr)
             return true;
-        if (root->left != nullptr)
-        {
-            if (root->left->val >= root->val || root->left->val <= val)
-                return false;
-        }
-        if (root->right != nullptr)
-        {
-            if (root->right->val <= root->val || root->right->val <= val)
-                return false;
-        }
-        return isValidLeftSubtree(root->left, root->val, root_val) && isValidRightSubtree(root->right, root->val, root_val);
-    }
-
-    static bool isValidLeftSubtree(TreeNode* root, int val, int root_val)
-    {
-        if (root == nullptr)
-            return true;
-        if (root->left != nullptr)
-        {
-            if (root->left->val >= root->val || root->left->val >= val || root->left->val )
-                return false;
-        }
-        if (root->right != nullptr)
-        {
-            if (root->right->val <= root->val || root->right->val >= val)
-                return false;
-        }
-        return isValidLeftSubtree(root->left, root->val, root_val) && isValidRightSubtree(root->right, root->val, root_val);
+        auto val = node->val;
+        if (val <= minBound || val >= maxBound)
+            return false;
+        return validate(node->left, minBound, val) && validate(node->right, val, maxBound);
     }
 
     static bool isValidBST(TreeNode* root)
     {
-        if (root == nullptr)
-            return true;
-        if (root->left != nullptr && root->left->val >= root->val)
-            return false;
-        if (root->right != nullptr && root->right->val <= root->val)
-            return false;
-        return isValidLeftSubtree(root->left, root->val, root->val) && isValidRightSubtree(root->right, root->val, root->val);
+        return validate(root, std::numeric_limits<long>::min(), std::numeric_limits<long>::max());
     }
 };
 

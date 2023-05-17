@@ -63,6 +63,89 @@ public:
     }
 };
 
+//
+// *** HELPER FUNCTIONS ***
+//
+
+namespace binary_tree
+{
+auto value2node(const int value)
+{
+    return std::make_unique<TreeNode>(value);
+}
+
+auto values2nodes(const std::vector<int>& values)
+{
+    std::vector<std::vector<std::unique_ptr<TreeNode>>> all_nodes;
+    int level = 0; // tree level we're currently processing
+    std::vector<std::unique_ptr<TreeNode>> cur_level_nodes;
+    int parent_index = -1; // index of up-level node to add children to
+    bool left_child = true;
+    for (const int value: values)
+    {
+        // A value of -1 means no child in that position
+        if (value != -1)
+        {
+            // add node with this value to current level nodes
+            cur_level_nodes.emplace_back(value2node(value));
+            if (parent_index > -1)
+            {
+                auto& parent_node = all_nodes[level - 1][parent_index];
+                auto& node = cur_level_nodes.back();
+                if (left_child)
+                    parent_node->left = node.get();
+                else
+                    parent_node->right = node.get();
+                left_child = !left_child;
+            }
+            else
+            {
+                // root node
+                // add current level nodes to all nodes
+                all_nodes.emplace_back(std::move(cur_level_nodes));
+                // increment current level
+                ++level;
+                // clear current level nodes
+                cur_level_nodes.clear();
+                parent_index = 0;
+            }
+        }
+        else
+        {
+            // check that we're at level 0
+            // check that we haven't run out of parent nodes
+            ++parent_index;
+            if (level == 0 || parent_index >= all_nodes[level - 1].size()) // ran out of parents
+            {
+                // add current level nodes to all nodes
+                all_nodes.emplace_back(std::move(cur_level_nodes));
+                // increment current level
+                ++level;
+                // clear current level nodes
+                cur_level_nodes.clear();
+                parent_index = 0;
+            }
+        }
+    }
+
+    if (!cur_level_nodes.empty())
+    {
+        all_nodes.emplace_back(std::move(cur_level_nodes));
+    }
+
+    return all_nodes;
+}
+
+TreeNode* nodes2root(const std::vector<std::vector<std::unique_ptr<TreeNode>>>& nodes)
+{
+    if (nodes.empty())
+        return nullptr;
+    if (nodes[0].empty())
+        return nullptr;
+    return nodes[0][0].get();
+}
+} // namespace binary_tree
+
 //        ┌───┐
 //   ┌────│ 2 │────┐
 //   │    └───┘    │
@@ -74,13 +157,13 @@ public:
 
 TEST(ValidateBinarySearchTree, Test1)
 {
+    using namespace binary_tree;
     [[maybe_unused]] std::vector<int> values = {2, 1, 3};
-    auto left = std::make_unique<TreeNode>(1);
-    auto right = std::make_unique<TreeNode>(3);
-    auto root = std::make_unique<TreeNode>(2, left.get(), right.get());
-    ASSERT_TRUE(Solution::isValidBST(root.get()));
+    auto nodes = values2nodes(values);
+    TreeNode* root = nodes2root(nodes);
+    ASSERT_TRUE(Solution::isValidBST(root));
     SolutionInOrder solution;
-    ASSERT_TRUE(solution.isValidBST(root.get()));
+    ASSERT_TRUE(solution.isValidBST(root));
 }
 
 //        ┌───┐

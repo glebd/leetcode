@@ -3,27 +3,14 @@
 #include <memory>
 #include <vector>
 
-// https://leetcode.com/problems/validate-binary-search-tree/
+#include "binary_tree.h"
 
-// Definition for a binary tree node.
-struct TreeNode
-{
-    int val{0};
-    TreeNode* left{};
-    TreeNode* right{};
-    TreeNode() = default;
-    explicit TreeNode(int x) : val(x)
-    {
-    }
-    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right)
-    {
-    }
-};
+// https://leetcode.com/problems/validate-binary-search-tree/
 
 class Solution
 {
 public:
-    static bool validate(TreeNode* node, long minBound, long maxBound)
+    static bool validate(TreeNode* node, long minBound, long maxBound) // NOLINT
     {
         if (node == nullptr)
             return true;
@@ -44,7 +31,7 @@ class SolutionInOrder
 public:
     long prev{std::numeric_limits<long>::min()};
 
-    bool inorder(TreeNode* node)
+    bool inorder(TreeNode* node) // NOLINT
     {
         if (node == nullptr)
             return true;
@@ -62,80 +49,6 @@ public:
         return inorder(root);
     }
 };
-
-//
-// *** HELPER FUNCTIONS ***
-//
-
-namespace binary_tree
-{
-auto value2node(const int value)
-{
-    return std::make_unique<TreeNode>(value);
-}
-
-auto values2nodes(const std::vector<int>& values)
-{
-    std::vector<std::vector<std::unique_ptr<TreeNode>>> all_nodes;
-    int level = 0; // tree level we're currently processing
-    std::vector<std::unique_ptr<TreeNode>> cur_level_nodes;
-    int parent_index = 0; // index of up-level node to add children to
-    bool left_child = true;
-    for (const int value: values)
-    {
-        // add node with this value to current level nodes
-        cur_level_nodes.emplace_back(value2node(value));
-        if (level > 0)
-        {
-            auto& parent_node = all_nodes[level - 1][parent_index];
-            auto& node = cur_level_nodes.back();
-            if (left_child)
-            {
-                if (value != -1)
-                    parent_node->left = node.get();
-            }
-            else
-            {
-                // at the right child
-                if (value != -1)
-                    parent_node->right = node.get();
-
-                // go to next parent
-                ++parent_index;
-            }
-            left_child = !left_child;
-        }
-
-        // check that we're either on level 0 or that we ran out of parent nodes, and if so, go to next level
-        if (level == 0 || parent_index >= static_cast<int>(all_nodes[level - 1].size()))
-        {
-            // add current level nodes to all nodes
-            all_nodes.emplace_back(std::move(cur_level_nodes));
-            // increment current level
-            ++level;
-            // clear current level nodes
-            cur_level_nodes.clear();
-            parent_index = 0;
-        }
-    }
-
-    if (!cur_level_nodes.empty())
-    {
-        all_nodes.emplace_back(std::move(cur_level_nodes));
-    }
-
-    return all_nodes;
-}
-
-TreeNode* nodes2root(const std::vector<std::vector<std::unique_ptr<TreeNode>>>& nodes)
-{
-    if (nodes.empty())
-        return nullptr;
-    if (nodes[0].empty())
-        return nullptr;
-    return nodes[0][0].get();
-}
-} // namespace binary_tree
 
 //        ┌───┐
 //   ┌────│ 2 │────┐

@@ -60,6 +60,7 @@ target_link_options(0098_validate_binary_search_tree PRIVATE
     -stdlib=libc++
 )
 target_sources(0098_validate_binary_search_tree PRIVATE
+    src/binary_tree.cpp
     src/main.cpp
 )
 

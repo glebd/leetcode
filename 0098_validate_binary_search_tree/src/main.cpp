@@ -101,22 +101,13 @@ auto values2nodes(const std::vector<int>& values)
                     parent_node->right = node.get();
 
                 // go to next parent
-                // check that we're at level 0 or that we haven't run out of parent nodes
                 ++parent_index;
-                if (level == 0 || parent_index >= all_nodes[level - 1].size()) // ran out of parents
-                {
-                    // add current level nodes to all nodes
-                    all_nodes.emplace_back(std::move(cur_level_nodes));
-                    // increment current level
-                    ++level;
-                    // clear current level nodes
-                    cur_level_nodes.clear();
-                    parent_index = 0;
-                }
             }
             left_child = !left_child;
         }
-        else
+
+        // check that we're either at level 0 or that we haven't run out of parent nodes, and if so, go to next level
+        if (parent_index == -1 || (level == 0 || parent_index >= all_nodes[level - 1].size()))
         {
             // root node
             // add current level nodes to all nodes

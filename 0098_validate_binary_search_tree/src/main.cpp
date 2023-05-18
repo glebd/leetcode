@@ -79,13 +79,13 @@ auto values2nodes(const std::vector<int>& values)
     std::vector<std::vector<std::unique_ptr<TreeNode>>> all_nodes;
     int level = 0; // tree level we're currently processing
     std::vector<std::unique_ptr<TreeNode>> cur_level_nodes;
-    int parent_index = -1; // index of up-level node to add children to
+    int parent_index = 0; // index of up-level node to add children to
     bool left_child = true;
     for (const int value: values)
     {
         // add node with this value to current level nodes
         cur_level_nodes.emplace_back(value2node(value));
-        if (parent_index > -1)
+        if (level > 0)
         {
             auto& parent_node = all_nodes[level - 1][parent_index];
             auto& node = cur_level_nodes.back();
@@ -106,8 +106,8 @@ auto values2nodes(const std::vector<int>& values)
             left_child = !left_child;
         }
 
-        // check that we're either at level 0 or that we ran out of parent nodes, and if so, go to next level
-        if (level == 0 || parent_index >= all_nodes[level - 1].size())
+        // check that we're either on level 0 or that we ran out of parent nodes, and if so, go to next level
+        if (level == 0 || parent_index >= static_cast<int>(all_nodes[level - 1].size()))
         {
             // add current level nodes to all nodes
             all_nodes.emplace_back(std::move(cur_level_nodes));

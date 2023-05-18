@@ -83,57 +83,25 @@ auto values2nodes(const std::vector<int>& values)
     bool left_child = true;
     for (const int value: values)
     {
-        // A value of -1 means no child in that position
-        if (value != -1)
+        // add node with this value to current level nodes
+        cur_level_nodes.emplace_back(value2node(value));
+        if (parent_index > -1)
         {
-            // add node with this value to current level nodes
-            cur_level_nodes.emplace_back(value2node(value));
-            if (parent_index > -1)
+            auto& parent_node = all_nodes[level - 1][parent_index];
+            auto& node = cur_level_nodes.back();
+            if (left_child)
             {
-                auto& parent_node = all_nodes[level - 1][parent_index];
-                auto& node = cur_level_nodes.back();
-                if (left_child)
+                if (value != -1)
                     parent_node->left = node.get();
-                else
-                    parent_node->right = node.get();
-                if (!left_child)
-                {
-                    // at the right child, skip and go to next parent
-                    // check that we're at level 0
-                    // check that we haven't run out of parent nodes
-                    ++parent_index;
-                    if (level == 0 || parent_index >= all_nodes[level - 1].size()) // ran out of parents
-                    {
-                        // add current level nodes to all nodes
-                        all_nodes.emplace_back(std::move(cur_level_nodes));
-                        // increment current level
-                        ++level;
-                        // clear current level nodes
-                        cur_level_nodes.clear();
-                        parent_index = 0;
-                    }
-                }
-                left_child = !left_child;
             }
             else
             {
-                // root node
-                // add current level nodes to all nodes
-                all_nodes.emplace_back(std::move(cur_level_nodes));
-                // increment current level
-                ++level;
-                // clear current level nodes
-                cur_level_nodes.clear();
-                parent_index = 0;
-            }
-        }
-        else // -1 marks null child on either left or right of the parent node
-        {
-            if (!left_child)
-            {
-                // at the right child, skip and go to next parent
-                // check that we're at level 0
-                // check that we haven't run out of parent nodes
+                // at the right child
+                if (value != -1)
+                    parent_node->right = node.get();
+
+                // go to next parent
+                // check that we're at level 0 or that we haven't run out of parent nodes
                 ++parent_index;
                 if (level == 0 || parent_index >= all_nodes[level - 1].size()) // ran out of parents
                 {
@@ -147,6 +115,17 @@ auto values2nodes(const std::vector<int>& values)
                 }
             }
             left_child = !left_child;
+        }
+        else
+        {
+            // root node
+            // add current level nodes to all nodes
+            all_nodes.emplace_back(std::move(cur_level_nodes));
+            // increment current level
+            ++level;
+            // clear current level nodes
+            cur_level_nodes.clear();
+            parent_index = 0;
         }
     }
 

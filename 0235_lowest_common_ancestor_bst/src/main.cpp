@@ -1,9 +1,7 @@
-#include <iostream>
+#include <gtest/gtest.h>
+#include <tools/binary_tree.h>
 
-using namespace std;
-
-int main(int argc, char** argv)
+TEST(CommonAncestor, Test1)
 {
-    cout << "hello world!" << endl;
-    return 0;
+    ASSERT_TRUE(true);
 }

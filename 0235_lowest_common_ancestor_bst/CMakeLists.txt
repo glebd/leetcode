@@ -12,6 +12,9 @@ add_executable(0235_lowest_common_ancestor_bst "")
 set_target_properties(0235_lowest_common_ancestor_bst PROPERTIES OUTPUT_NAME "0235_lowest_common_ancestor_bst")
 set_target_properties(0235_lowest_common_ancestor_bst PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/macosx/arm64/release")
 target_include_directories(0235_lowest_common_ancestor_bst PRIVATE
+    ..
+)
+target_include_directories(0235_lowest_common_ancestor_bst PRIVATE
     /Users/glebd/.xmake/packages/g/gtest/1.12.1/21da21ec6eaa4e118558ee867d7f0b6c/include
 )
 target_compile_options(0235_lowest_common_ancestor_bst PRIVATE
@@ -61,5 +64,6 @@ target_link_options(0235_lowest_common_ancestor_bst PRIVATE
 )
 target_sources(0235_lowest_common_ancestor_bst PRIVATE
     src/main.cpp
+    ../tools/binary_tree.cpp
 )
 

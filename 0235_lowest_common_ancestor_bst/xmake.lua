@@ -5,6 +5,8 @@ add_requires("gtest")
 target("0235_lowest_common_ancestor_bst")
     set_kind("binary")
     add_files("src/*.cpp")
+    add_files("../tools/*.cpp")
+    add_includedirs("..")
     add_packages("gtest")
 
 --

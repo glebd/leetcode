@@ -55,6 +55,23 @@ struct SolutionRec
     }
 };
 
+struct SolutionIter
+{
+    static TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) // NOLINT: misc-no-recursion
+    {
+        while (root)
+        {
+            if (p->val > root->val && q->val > root->val)
+                root = root->right;
+            else if (p->val < root->val && q->val < root->val)
+                root = root->left;
+            else
+                return root;
+        }
+        return nullptr;
+    }
+};
+
 TEST(CommonAncestor, Test1)
 {
     using namespace binary_tree;
@@ -65,6 +82,7 @@ TEST(CommonAncestor, Test1)
     TreeNode* q = root->right;
     ASSERT_EQ(Solution::lowestCommonAncestor(root, p, q), root);
     ASSERT_EQ(SolutionRec::lowestCommonAncestor(root, p, q), root);
+    ASSERT_EQ(SolutionIter::lowestCommonAncestor(root, p, q), root);
 }
 
 TEST(CommonAncestor, Test2)
@@ -77,6 +95,7 @@ TEST(CommonAncestor, Test2)
     TreeNode* q = p->right;
     ASSERT_EQ(Solution::lowestCommonAncestor(root, p, q), p);
     ASSERT_EQ(SolutionRec::lowestCommonAncestor(root, p, q), p);
+    ASSERT_EQ(SolutionIter::lowestCommonAncestor(root, p, q), p);
 }
 
 TEST(CommonAncestor, Test3)
@@ -89,4 +108,5 @@ TEST(CommonAncestor, Test3)
     TreeNode* q = p->left;
     ASSERT_EQ(Solution::lowestCommonAncestor(root, p, q), root);
     ASSERT_EQ(SolutionRec::lowestCommonAncestor(root, p, q), root);
+    ASSERT_EQ(SolutionIter::lowestCommonAncestor(root, p, q), root);
 }

@@ -11,7 +11,7 @@ public:
     /// \param root BST root node
     /// \param node Node to search for
     /// \return Vector of nodes from root (incl.) to the node (incl.)
-    std::vector<TreeNode*> findPath(TreeNode* root, TreeNode* node)
+    static std::vector<TreeNode*> findPath(TreeNode* root, TreeNode* node)
     {
         std::vector<TreeNode*> path;
         TreeNode* cur = root;
@@ -28,7 +28,7 @@ public:
         return path;
     }
 
-    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)
+    static TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)
     {
         auto p_path = findPath(root, p);
         auto q_path = findPath(root, q);
@@ -48,10 +48,9 @@ TEST(CommonAncestor, Test1)
     std::vector<int> values = {6, 2, 8, 0, 4, 7, 9, -1, -1, 3, 5};
     auto nodes = values2nodes(values);
     TreeNode* root = nodes2root(nodes);
-    Solution solution;
     TreeNode* p = root->left;
     TreeNode* q = root->right;
-    ASSERT_EQ(solution.lowestCommonAncestor(root, p, q), root);
+    ASSERT_EQ(Solution::lowestCommonAncestor(root, p, q), root);
 }
 
 TEST(CommonAncestor, Test2)
@@ -60,10 +59,9 @@ TEST(CommonAncestor, Test2)
     std::vector<int> values = {6, 2, 8, 0, 4, 7, 9, -1, -1, 3, 5};
     auto nodes = values2nodes(values);
     TreeNode* root = nodes2root(nodes);
-    Solution solution;
     TreeNode* p = root->left;
     TreeNode* q = p->right;
-    ASSERT_EQ(solution.lowestCommonAncestor(root, p, q), p);
+    ASSERT_EQ(Solution::lowestCommonAncestor(root, p, q), p);
 }
 
 TEST(CommonAncestor, Test3)
@@ -72,8 +70,7 @@ TEST(CommonAncestor, Test3)
     std::vector<int> values = {2, 1};
     auto nodes = values2nodes(values);
     TreeNode* root = nodes2root(nodes);
-    Solution solution;
     TreeNode* p = root;
     TreeNode* q = p->left;
-    ASSERT_EQ(solution.lowestCommonAncestor(root, p, q), root);
+    ASSERT_EQ(Solution::lowestCommonAncestor(root, p, q), root);
 }

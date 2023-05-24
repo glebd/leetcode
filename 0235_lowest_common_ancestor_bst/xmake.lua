@@ -1,7 +1,5 @@
-add_rules("mode.debug", "mode.release")
 set_languages("c11", "c++17")
 add_requires("gtest")
-set_optimize("none")
 
 target("0235_lowest_common_ancestor_bst")
     set_kind("binary")

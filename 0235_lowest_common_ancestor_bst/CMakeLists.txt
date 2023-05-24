@@ -26,22 +26,11 @@ target_compile_options(0235_lowest_common_ancestor_bst PRIVATE
     $<$<COMPILE_LANGUAGE:CXX>:-isysroot>
     $<$<COMPILE_LANGUAGE:C>:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk>
     $<$<COMPILE_LANGUAGE:CXX>:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk>
-    $<$<COMPILE_LANGUAGE:C>:-DNDEBUG>
-    $<$<COMPILE_LANGUAGE:CXX>:-DNDEBUG>
 )
 set_target_properties(0235_lowest_common_ancestor_bst PROPERTIES CXX_EXTENSIONS OFF)
 target_compile_features(0235_lowest_common_ancestor_bst PRIVATE c_std_11)
 set_target_properties(0235_lowest_common_ancestor_bst PROPERTIES CXX_EXTENSIONS OFF)
 target_compile_features(0235_lowest_common_ancestor_bst PRIVATE cxx_std_17)
-if(MSVC)
-    target_compile_options(0235_lowest_common_ancestor_bst PRIVATE $<$<CONFIG:Debug>:-Od>)
-else()
-    target_compile_options(0235_lowest_common_ancestor_bst PRIVATE -O0)
-endif()
-if(MSVC)
-else()
-    target_compile_options(0235_lowest_common_ancestor_bst PRIVATE -fvisibility=hidden)
-endif()
 if(MSVC)
     set_property(TARGET 0235_lowest_common_ancestor_bst PROPERTY
         MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")

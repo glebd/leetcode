@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 
 #include <stack>
-#include <tuple>
 #include <vector>
 
 class Solution
@@ -9,33 +8,33 @@ class Solution
 public:
     static std::vector<std::vector<int>> floodFill(std::vector<std::vector<int>>& image, int sr, int sc, int color)
     {
-        int& center = image[sr][sc];
-        if (center == color)
+        int& center_color = image[sr][sc];
+        if (center_color == color)
             return image;
-        const int old_center = center;
-        center = color;
+        const int old_color = center_color;
+        center_color = color;
         if (sr > 0)
         {
             int& top = image[sr - 1][sc];
-            if (top == old_center)
+            if (top == old_color)
                 floodFill(image, sr - 1, sc, color);
         }
         if (sc < static_cast<int>(image[sr].size()) - 1)
         {
             int& right = image[sr][sc + 1];
-            if (right == old_center)
+            if (right == old_color)
                 floodFill(image, sr, sc + 1, color);
         }
         if (sr < static_cast<int>(image.size()) - 1)
         {
             int& bottom = image[sr + 1][sc];
-            if (bottom == old_center)
+            if (bottom == old_color)
                 floodFill(image, sr + 1, sc, color);
         }
         if (sc > 0)
         {
             int& left = image[sr][sc - 1];
-            if (left == old_center)
+            if (left == old_color)
                 floodFill(image, sr, sc - 1, color);
         }
         return image;
@@ -53,10 +52,10 @@ class IterSolution
 public:
     static std::vector<std::vector<int>> floodFill(std::vector<std::vector<int>>& image, int sr, int sc, int color)
     {
-        int& center = image[sr][sc];
-        if (center == color)
+        int& center_color = image[sr][sc];
+        if (center_color == color)
             return image;
-        const int old_center = center;
+        const int old_color = center_color;
         Coordinate start{sr, sc};
         std::stack<Coordinate> todo{{start}};
         while (!todo.empty())
@@ -65,13 +64,13 @@ public:
             int& pixel = image[cur.row][cur.col];
             pixel = color;
             todo.pop();
-            if (cur.row > 0 && image[cur.row - 1][cur.col] == old_center)
+            if (cur.row > 0 && image[cur.row - 1][cur.col] == old_color)
                 todo.push({cur.row - 1, cur.col});
-            if (cur.col < static_cast<int>(image[cur.row].size()) - 1 && image[cur.row][cur.col + 1] == old_center)
+            if (cur.col < static_cast<int>(image[cur.row].size()) - 1 && image[cur.row][cur.col + 1] == old_color)
                 todo.push({cur.row, cur.col + 1});
-            if (cur.row < static_cast<int>(image.size()) - 1 && image[cur.row + 1][cur.col] == old_center)
+            if (cur.row < static_cast<int>(image.size()) - 1 && image[cur.row + 1][cur.col] == old_color)
                 todo.push({cur.row + 1, cur.col});
-            if (cur.col > 0 && image[cur.row][cur.col - 1] == old_center)
+            if (cur.col > 0 && image[cur.row][cur.col - 1] == old_color)
                 todo.push({cur.row, cur.col - 1});
         }
         return image;

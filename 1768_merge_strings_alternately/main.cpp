@@ -1,5 +1,6 @@
-#include <iostream>
+#include <gtest/gtest.h>
 
-int main(int argc, char** argv) {
-    std::cout << "Hello, world!\n";
+TEST(MergeStringsAlt, Test1)
+{
+    ASSERT_TRUE(true);
 }

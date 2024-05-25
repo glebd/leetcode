@@ -1,5 +1,5 @@
 #include <string>
-#include <vector>
+#include <array>
 
 #include <gtest/gtest.h>
 
@@ -11,7 +11,7 @@ public:
   static std::string mergeAlternately(std::string word1, std::string word2)
   {
     std::string result;
-    std::vector word_ps{word1.c_str(), word2.c_str()};
+    std::array word_ps{word1.c_str(), word2.c_str()};
     int index = 0;
     while (*word_ps[0] && *word_ps[1]) {
       const char*& word_p = word_ps[index];

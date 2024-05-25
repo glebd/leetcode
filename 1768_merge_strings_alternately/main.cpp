@@ -11,7 +11,7 @@ public:
   static std::string mergeAlternately(std::string word1, std::string word2)
   {
     std::string result;
-    std::vector<std::string*> word_ps{&word1, &word2};
+    std::vector word_ps{&word1, &word2};
     int index = 0;
     while (!word1.empty() && !word2.empty()) {
       std::string* word_p = word_ps[index];

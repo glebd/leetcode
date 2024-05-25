@@ -29,7 +29,7 @@ public:
   }
 };
 
-TEST(MergeStringsAlt, Test00)
+TEST(MergeStringsAlt, Test0)
 {
   ASSERT_EQ(Solution::mergeAlternately("a", "b"), "ab");
 }

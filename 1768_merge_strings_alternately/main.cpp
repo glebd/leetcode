@@ -13,17 +13,17 @@ public:
     std::string result;
     std::vector<std::string*> word_ps{&word1, &word2};
     int index = 0;
-    while (word1.length() && word2.length()) {
+    while (!word1.empty() && !word2.empty()) {
       std::string* word_p = word_ps[index];
-      if (word_p->length()) {
+      if (!word_p->empty()) {
         result += (*word_p)[0];
         *word_p = &(*word_p)[1];
         index = 1 - index;
       }
     }
-    if (word1.length())
+    if (!word1.empty())
       result += word1;
-    else if (word2.length())
+    else if (!word2.empty())
       result += word2;
     return result;
   }

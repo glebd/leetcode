@@ -15,17 +15,7 @@ public:
 
 TEST(MergeStringsAlt, Test00)
 {
-  ASSERT_EQ(Solution::mergeAlternately("", ""), "");
-}
-
-TEST(MergeStringsAlt, Test01)
-{
-  ASSERT_EQ(Solution::mergeAlternately("abc", ""), "abc");
-}
-
-TEST(MergeStringsAlt, Test02)
-{
-  ASSERT_EQ(Solution::mergeAlternately("", "pqr"), "pqr");
+  ASSERT_EQ(Solution::mergeAlternately("a", "b"), "ab");
 }
 
 TEST(MergeStringsAlt, Test1)

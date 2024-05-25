@@ -1,4 +1,5 @@
 #include <string>
+#include <vector>
 
 #include <gtest/gtest.h>
 
@@ -10,16 +11,14 @@ public:
   static std::string mergeAlternately(std::string word1, std::string word2)
   {
     std::string result;
-    int index = 1;
+    std::vector<std::string*> word_ps{&word1, &word2};
+    int index = 0;
     while (word1.length() && word2.length()) {
-      if (index == 1 && word1.length()) {
-        result += word1[0];
-        word1 = &word1[1];
-        index = 2;
-      } else if (index == 2 && word2.length()) {
-        result += word2[0];
-        word2 = &word2[1];
-        index = 1;
+      std::string* word_p = word_ps[index];
+      if (word_p->length()) {
+        result += (*word_p)[0];
+        *word_p = &(*word_p)[1];
+        index = 1 - index;
       }
     }
     if (word1.length())

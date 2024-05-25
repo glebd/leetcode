@@ -1,1 +1,3 @@
 # Bazel resource file
+
+build --cxxopt="-std=c++17"

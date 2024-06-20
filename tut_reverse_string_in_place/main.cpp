@@ -11,3 +11,8 @@ public:
   {
   }
 };
+
+TEST(Dummy, Test1)
+{
+  ASSERT_TRUE(true);
+}

@@ -1,3 +1,4 @@
+#include <string>
 #include <vector>
 
 #include <gtest/gtest.h>
@@ -7,12 +8,37 @@
 class Solution
 {
 public:
-  void reverseString(std::vector<char>& s)
+  static void reverseString(std::vector<char>& s)
   {
   }
 };
 
-TEST(Dummy, Test1)
+TEST(ReverseString, Test1)
 {
-  ASSERT_TRUE(true);
+  std::string const src{"hello"};
+  std::string const exp{"olleh"};
+  std::vector<char> input{std::begin(src), std::end(src)};
+  std::vector<char> expected{std::begin(exp), std::end(exp)};
+  Solution::reverseString(input);
+  ASSERT_EQ(input, expected);
+}
+
+TEST(ReverseString, Test2)
+{
+  std::string const src{"Hannah"};
+  std::string const exp{"hannaH"};
+  std::vector<char> input{std::begin(src), std::end(src)};
+  std::vector<char> expected{std::begin(exp), std::end(exp)};
+  Solution::reverseString(input);
+  ASSERT_EQ(input, expected);
+}
+
+TEST(ReverseString, Test3)
+{
+  std::string const src{"a"};
+  std::string const exp{"a"};
+  std::vector<char> input{std::begin(src), std::end(src)};
+  std::vector<char> expected{std::begin(exp), std::end(exp)};
+  Solution::reverseString(input);
+  ASSERT_EQ(input, expected);
 }

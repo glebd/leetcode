@@ -10,15 +10,14 @@ class Solution
 public:
   void reverseString(std::vector<char>& s)
   {
-    if (s.empty())
+    size_t const size = s.size();
+    if (!size)
       return;
     size_t i1{0};
-    size_t i2{s.size() - 1};
+    size_t i2{size - 1};
     while (i1 < i2)
     {
-      std::swap(s[i1], s[i2]);
-      i1++;
-      i2--;
+      std::swap(s[i1++], s[i2--]);
     }
   }
 };
@@ -49,6 +48,6 @@ TEST(ReverseString, Test3)
   std::string const exp{"a"};
   std::vector<char> input{std::begin(src), std::end(src)};
   std::vector<char> expected{std::begin(exp), std::end(exp)};
-  Solution::reverseString(input);
+  Solution{}.reverseString(input);
   ASSERT_EQ(input, expected);
 }

@@ -34,7 +34,7 @@ public:
     std::vector<int> res(size);
     size_t i1 = 0;
     size_t i2 = size - 1;
-    int i = i2;
+    int i = static_cast<int>(i2);
     while (i >= 0)
     {
       int n1 = nums[i1];

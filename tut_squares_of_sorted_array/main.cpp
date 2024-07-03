@@ -21,15 +21,15 @@ public:
   }
 };
 
-//Runtime: 26 ms (beats 42%)
-//Memory Usage: 28.4 MB (beats 81%)
-//Just because of std::size()?
+//Runtime: 17 ms (beats 86%)
+//Memory Usage: 28.4 MB (beats 65%)
+// Speed up just by not using std::ssize()? Mad!
 class OptSolution
 {
 public:
   static std::vector<int> sortedSquares(std::vector<int>& nums)
   {
-    int const size = static_cast<int>(std::ssize(nums));
+    int const size = static_cast<int>(nums.size());
     if (!size)
       return nums;
     std::vector<int> res(size);

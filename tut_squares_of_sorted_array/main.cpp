@@ -21,20 +21,21 @@ public:
   }
 };
 
-// Runtime: 11 ms (beats 98%)
-// Memory Usage: 28.5 MB (beats 65%)
+//Runtime: 26 ms (beats 42%)
+//Memory Usage: 28.4 MB (beats 81%)
+//Just because of std::size()?
 class OptSolution
 {
 public:
   static std::vector<int> sortedSquares(std::vector<int>& nums)
   {
-    size_t const size = nums.size();
+    int const size = static_cast<int>(std::ssize(nums));
     if (!size)
       return nums;
     std::vector<int> res(size);
-    size_t i1 = 0;
-    size_t i2 = size - 1;
-    int i = static_cast<int>(i2);
+    int i1 = 0;
+    int i2 = size - 1;
+    int i = i2;
     while (i >= 0)
     {
       int n1 = nums[i1];

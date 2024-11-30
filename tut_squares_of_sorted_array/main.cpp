@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <vector>
+#include <ranges>
 
 #include <gtest/gtest.h>
 
@@ -17,8 +18,8 @@ public:
     {
       n = n * n;
     }
-    std::sort(std::begin(nums), std::end(nums));
     // sort the resulting vector
+    std::ranges::sort(nums);
     return nums;
   }
 };

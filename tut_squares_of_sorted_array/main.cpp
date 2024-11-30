@@ -12,11 +12,13 @@ class TrivialSolution
 public:
   static std::vector<int> sortedSquares(std::vector<int>& nums)
   {
+    // replace each element with its square
     for (int& n: nums)
     {
       n = n * n;
     }
     std::sort(std::begin(nums), std::end(nums));
+    // sort the resulting vector
     return nums;
   }
 };
@@ -24,6 +26,7 @@ public:
 //Runtime: 17 ms (beats 86%)
 //Memory Usage: 28.4 MB (beats 65%)
 // Speed up just by not using std::ssize()? Mad!
+// https://leetcode.com/problems/squares-of-a-sorted-array/editorial/
 class OptSolution
 {
 public:
@@ -32,6 +35,8 @@ public:
     int const size = static_cast<int>(nums.size());
     if (!size)
       return nums;
+    // Define empty result array of the same size as input.
+    // Fill it backwards with already-sorted values by looking at the 2 converging indexes into the input array.
     std::vector<int> res(size);
     int i1 = 0;
     int i2 = size - 1;

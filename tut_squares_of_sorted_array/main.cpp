@@ -44,10 +44,10 @@ public:
     int i = i2;
     while (i >= 0)
     {
-      int n1 = nums[i1];
-      int n2 = nums[i2];
-      int n1sq = n1 * n1;
-      int n2sq = n2 * n2;
+      int const n1 = nums[i1];
+      int const n2 = nums[i2];
+      int const n1sq = n1 * n1;
+      int const n2sq = n2 * n2;
       if (n1sq >= n2sq)
       {
         res[i] = n1sq;

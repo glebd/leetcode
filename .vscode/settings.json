@@ -1,0 +1,13 @@
+{
+  "configuration": {
+    "type": "object",
+    "title": "Xmake configuration",
+    "properties": {
+      "xmake.executable": {
+        "type": "string",
+        "default": "/usr/sbin/xmake",
+        "description": "The xmake executable name / path"
+      }
+    }
+  }
+}

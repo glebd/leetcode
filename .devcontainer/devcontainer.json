@@ -1,0 +1,18 @@
+{
+  "name": "GD-LeetCode",
+  "build": { "dockerfile": "Dockerfile" },
+  "containerEnv": {
+    "XMAKE_ROOT": "y"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+      },
+      "extensions": [
+        "ms-vscode.cpptools-extension-pack",
+        "tboox.xmake-vscode"
+      ]
+    }
+  }
+}

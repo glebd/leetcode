@@ -9,5 +9,6 @@
         "description": "The xmake executable name / path"
       }
     }
-  }
+  },
+  "cmake.sourceDirectory": "/workspaces/leetcode/0200_number_of_islands"
 }

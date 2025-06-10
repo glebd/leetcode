@@ -1,12 +1,9 @@
-set_languages("c11", "c++17")
-add_requires("gtest")
-
 target("0235_lowest_common_ancestor_bst")
-    set_kind("binary")
-    add_files("src/*.cpp")
-    add_files("../tools/*.cpp")
-    add_includedirs("..")
-    add_packages("gtest")
+  set_kind("binary")
+  add_files("src/*.cpp")
+  add_files("../tools/*.cpp")
+  add_includedirs("..")
+  add_links("gtest_main", "gtest")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

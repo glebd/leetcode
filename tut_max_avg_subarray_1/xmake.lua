@@ -1,12 +1,7 @@
-set_languages("c++23")
-add_rules("mode.debug", "mode.release", "mode.asan", "mode.ubsan")
-add_requires("gtest")
-
 target("tut_max_avg_subarray_1")
-    set_kind("binary")
-    add_files("src/*.cpp")
-    add_packages("gtest")
-    add_links("gtest_main")
+  set_kind("binary")
+  add_files("src/*.cpp")
+  add_links("gtest_main", "gtest")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

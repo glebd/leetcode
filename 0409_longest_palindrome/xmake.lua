@@ -1,16 +1,11 @@
-add_rules("mode.debug", "mode.release")
-set_languages("c11", "c++17")
-add_requires("gtest", {configs = {main = true, gmock = true}})
-set_optimize("none")
-
 target("0409_longest_palindrome")
-    set_kind("binary")
-    add_files("src/*.cpp")
-	add_packages("gtest")
+  set_kind("binary")
+  add_files("src/*.cpp")
+	add_links("gtest_main", "gtest")
 	if is_plat("windows") then
-        -- fixes "LINK : fatal error LNK1561: entry point must be defined"
-        add_ldflags("/subsystem:console")
-    end
+    -- fixes "LINK : fatal error LNK1561: entry point must be defined"
+    add_ldflags("/subsystem:console")
+  end
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

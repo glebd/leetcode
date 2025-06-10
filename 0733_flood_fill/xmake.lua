@@ -1,10 +1,7 @@
-set_languages("c11", "c++17")
-add_requires("gtest")
-
 target("0733_flood_fill")
-    set_kind("binary")
-    add_files("src/*.cpp")
-    add_packages("gtest")
+  set_kind("binary")
+  add_files("src/*.cpp")
+  add_links("gtest_main", "gtest")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

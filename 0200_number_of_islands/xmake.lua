@@ -1,10 +1,7 @@
-set_languages("c11", "c++17")
-add_requires("gtest")
-
 target("0200_number_of_islands")
-    set_kind("binary")
-    add_files("src/*.cpp")
-    add_packages("gtest")
+  set_kind("binary")
+  add_files("src/*.cpp")
+  add_links("gtest_main", "gtest")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

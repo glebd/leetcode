@@ -2,5 +2,5 @@
 
 TEST(MaxAvgSubarray1, Test1)
 {
-    ASSERT_TRUE(true);
+  ASSERT_TRUE(true);
 }

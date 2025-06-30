@@ -1,5 +1,5 @@
-#include <string>
 #include <array>
+#include <string>
 
 #include <gtest/gtest.h>
 
@@ -13,9 +13,11 @@ public:
     std::string result;
     std::array word_ps{word1.c_str(), word2.c_str()};
     int index = 0;
-    while (*word_ps[0] && *word_ps[1]) {
+    while (*word_ps[0] && *word_ps[1])
+    {
       const char*& word_p = word_ps[index];
-      if (*word_p) {
+      if (*word_p)
+      {
         result += *word_p++;
         index = 1 - index;
       }
